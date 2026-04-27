@@ -1,29 +1,29 @@
 {
-  "limit_per_task": 5000,
+  "limit_per_task": 200,
   "alpha_bimodal": 0.5,
   "results": [
     {
       "mode": "text-only (GoEmotions test, single-label)",
-      "n": 4590,
-      "top1_acc": 0.6971677559912854,
+      "n": 200,
+      "top1_acc": 0.66,
       "notes": ""
     },
     {
       "mode": "image-only (AutumnQiu/fer2013, test split)",
-      "n": 3589,
-      "top1_acc": 0.2309835608804681,
+      "n": 200,
+      "top1_acc": 0.235,
       "notes": ""
     },
     {
       "mode": "bimodal congruent (FER image + template text, \u03b1=0.50)",
-      "n": 3589,
-      "top1_acc": 0.8158261354137643,
+      "n": 200,
+      "top1_acc": 0.75,
       "notes": ""
     }
   ],
   "ablation_on_fer_with_templates": {
-    "text_branch_acc": 0.8255781554750626,
-    "face_branch_acc": 0.2309835608804681,
-    "n": 3589
+    "text_branch_acc": 0.775,
+    "face_branch_acc": 0.235,
+    "n": 200
   }
 }

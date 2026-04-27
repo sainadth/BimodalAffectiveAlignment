@@ -2,18 +2,18 @@
 \begin{table*}[t]
   \centering
   \small
-  \caption{Top-1 FER$7$ accuracy (run: $n$ limited to 5000 per sub-task where applicable; $\alpha\!=\!0.5$ for fusion). \emph{Text:} GoEmotions test, single\nobreakdash label (mapped to FER$7$). \emph{Image:} \texttt{AutumnQiu/fer2013}. \emph{Bimodal:} one emotion\nobreakdash matched template per FER class; fusion per Eq.~\ref{eq:main}. Lower two rows: text-only and image-only \emph{branches} on the same bimodal pairs (ablation).}
+  \caption{Top-1 FER$7$ accuracy (run: $n$ limited to 200 per sub-task where applicable; $\alpha\!=\!0.5$ for fusion). \emph{Text:} GoEmotions test, single\nobreakdash label (mapped to FER$7$). \emph{Image:} \texttt{AutumnQiu/fer2013}. \emph{Bimodal:} one emotion\nobreakdash matched template per FER class; fusion per Eq.~\ref{eq:main}. Lower two rows: text-only and image-only \emph{branches} on the same bimodal pairs (ablation).}
   \label{tab:results}
   \begin{tabular}{@{}lcc@{}}
     \toprule
     \textbf{Setting} & \textbf{$n$} & \textbf{Acc. (\%)} \\
     \midrule
-    Text--only (GoEmotions) & 4590 & 69.7 \\
-    Image--only (FER2013) & 3589 & 23.1 \\
-    Text$+$image fused & 3589 & 81.6 \\
+    Text--only (GoEmotions) & 200 & 66.0 \\
+    Image--only (FER2013) & 200 & 23.5 \\
+    Text$+$image fused & 200 & 75.0 \\
     \midrule
-    Text branch only (same pairs) & 3589 & 82.6 \\
-    Image branch only (same pairs) & 3589 & 23.1 \\
+    Text branch only (same pairs) & 200 & 77.5 \\
+    Image branch only (same pairs) & 200 & 23.5 \\
     \bottomrule
   \end{tabular}
 \end{table*}

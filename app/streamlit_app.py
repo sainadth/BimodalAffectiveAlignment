@@ -5,8 +5,10 @@ Run:  streamlit run app/streamlit_app.py
 
 from __future__ import annotations
 
+import os
 import time
 from io import BytesIO
+from pathlib import Path
 
 import altair as alt
 import numpy as np
@@ -15,10 +17,17 @@ import streamlit as st
 from PIL import Image
 
 from bimodal_empathy.config import DEFAULT_ALPHA, FER7_LABELS, device_preference
+from bimodal_empathy.fer_finetune_ckpt import load_vision_finetuned
 from bimodal_empathy.fusion import fuse
 from bimodal_empathy.response_synthesizer import load_synthesizer
 from bimodal_empathy.text_sensor import load_text_model
 from bimodal_empathy.vision_sensor import load_vision_model, uniform_face_p_face
+
+# Default location for the fine-tuned ResNet checkpoint. Override with the
+# FINETUNE_CKPT env var or via the sidebar selector at runtime.
+FINETUNE_CKPT_PATH = Path(
+    os.getenv("FINETUNE_CKPT", "checkpoints/fer2013_finetune.pt")
+)
 
 
 def _fer_css():
@@ -60,7 +69,19 @@ def cached_text():
 
 
 @st.cache_resource
-def cached_vision():
+def cached_vision(weights_path: str | None = None):
+    """Cache one vision model per distinct weights_path so the baseline and
+    fine-tuned branches can coexist without re-downloading on every toggle.
+
+    The baseline ElenaRyumina checkpoint uses HF-style key naming and is loaded
+    by `load_vision_model`. The local fine-tuned bundle written by
+    `scripts/finetune_fer2013.py` is `{"state_dict", "meta"}` with pathlib paths
+    in `meta`, so it goes through `load_vision_finetuned` (which expects that
+    layout and uses `weights_only=False` for the trusted local file).
+    Both objects expose the same `.predict_fer7(image)` API.
+    """
+    if weights_path:
+        return load_vision_finetuned(weights_path)
     return load_vision_model()
 
 
@@ -83,39 +104,41 @@ def _fer7_prob_df(p: np.ndarray) -> pd.DataFrame:
     )
 
 
-def _bar_chart(p: np.ndarray, title: str) -> alt.Chart:
+def _bar_chart(p: np.ndarray, title: str, *, compact: bool = False) -> alt.Chart:
     """
-    Horizontal bars: P on x, emotions on y. Use ordinal channel + enough height so
-    Vega does not cull y-axis text (was showing ~4 of 7 labels in narrow 3-up layout).
+    Horizontal bars: P on x, emotions on y. All 7 FER-7 labels are forced visible by
+    sizing the chart with `alt.Step(...)` (per-band height) and using a nominal
+    y-encoding with `labelOverlap=False`. Total chart height is then 7*step plus
+    chrome, and Vega renders one tick label per band rather than auto-thinning.
     """
     df = _fer7_prob_df(p)
-    # Per-row step ~36px so labels + bar stay readable; 7 classes -> ~300px
-    h = 40 * 7
+    step = 36 if compact else 42
+    bar_size = 18 if compact else 22
     c = (
-        alt.Chart(df, title=alt.TitleParams(text=title, anchor="start", fontSize=14, fontWeight=500))
-        .mark_bar(cornerRadius=3, size=20, color="#4a90d9", stroke="#7eb8f0", strokeWidth=0.3)
+        alt.Chart(df, title=alt.TitleParams(text=title, anchor="start", fontSize=13, fontWeight=500))
+        .mark_bar(cornerRadius=3, size=bar_size, color="#4a90d9", stroke="#7eb8f0", strokeWidth=0.3)
         .encode(
             x=alt.X("p:Q", title="Probability", scale=alt.Scale(domain=[0, 1], nice=False)),
             y=alt.Y(
-                "emotion:O",
+                "emotion:N",
                 title="",
                 sort=list(FER7_LABELS),
+                scale=alt.Scale(paddingInner=0.25, paddingOuter=0.15),
                 axis=alt.Axis(
                     labelColor="#d0d3dc",
                     labelFontSize=12,
-                    labelPadding=4,
+                    labelPadding=6,
+                    labelOverlap=False,
+                    labelLimit=140,
                 ),
             ),
             tooltip=["emotion", alt.Tooltip("p:Q", title="P", format=".4f")],
         )
-        # Do not set properties(padding=NN): Streamlit's Vega renderer treats padding as
-        # a margin object; a number triggers "Cannot create property 'bottom' on number".
-        .properties(height=h)
-        .configure(
-            background="transparent",
-        )
+        .properties(height=alt.Step(step))
+        .configure(background="transparent")
         .configure_view(stroke="transparent", cornerRadius=4)
         .configure_axisX(gridColor="#3a3f4d", domainColor="#5c6370", labelColor="#b8bcc8", titleColor="#b8bcc8")
+        .configure_axisY(labelOverlap=False, labelLimit=140)
     )
     return c
 
@@ -148,6 +171,30 @@ def main() -> None:
         st.markdown(
             f"**{alpha:.2f}** text · **{1 - alpha:.2f}** face"
         )
+
+        st.divider()
+        st.subheader("Vision branch")
+        ft_available = FINETUNE_CKPT_PATH.is_file()
+        if ft_available:
+            vision_choice = st.radio(
+                "Face classifier weights",
+                options=("Baseline (HF AffectNet)", "Fine-tuned (FER2013)"),
+                index=1,
+                help=(
+                    f"Baseline = ElenaRyumina/face_emotion_recognition. "
+                    f"Fine-tuned = {FINETUNE_CKPT_PATH} produced by "
+                    "scripts/finetune_fer2013.py."
+                ),
+            )
+            use_finetune = vision_choice.startswith("Fine-tuned")
+        else:
+            st.caption(
+                "ℹ️ No fine-tuned checkpoint at "
+                f"`{FINETUNE_CKPT_PATH}`. Run "
+                "`python scripts/finetune_fer2013.py` to generate one, then reload."
+            )
+            use_finetune = False
+
         st.divider()
         run = st.button("Analyze & generate response", type="primary", use_container_width=True)
         st.caption("Models load on first use (may take a minute).")
@@ -180,9 +227,11 @@ def main() -> None:
         t_text0 = time.perf_counter()
         p_text, _, _ = tm.predict_fer7(utterance)
         timings["text_ms"] = (time.perf_counter() - t_text0) * 1000.0
+    vision_weights = str(FINETUNE_CKPT_PATH) if use_finetune else None
+    vision_branch_label = "fine-tuned (FER2013)" if use_finetune else "baseline (AffectNet)"
     if image is not None:
-        with st.spinner("Running face model…"):
-            vm = cached_vision()
+        with st.spinner(f"Running face model ({vision_branch_label})…"):
+            vm = cached_vision(vision_weights)
             t_face0 = time.perf_counter()
             p_face, _, _ = vm.predict_fer7(image)
             timings["face_ms"] = (time.perf_counter() - t_face0) * 1000.0
@@ -198,56 +247,80 @@ def main() -> None:
     t_arg_text = int(np.argmax(p_text))
     t_arg_face = int(np.argmax(p_face))
     dissonant = t_arg_text != t_arg_face
-    if dissonant:
-        st.markdown(
-            f'<p><span class="badge-dissonance">Affective dissonance</span> '
-            f"text: <b>{FER7_LABELS[t_arg_text]}</b> · face: <b>{FER7_LABELS[t_arg_face]}</b></p>",
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(
-            '<p><span class="badge-congruent">Congruent signals</span> (same argmax for text and face)</p>',
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        '<p class="section-title">Emotion distributions (7 FER-7 classes: each bar is labeled)</p>',
-        unsafe_allow_html=True,
-    )
-    st.caption("Charts use full width so every category name stays visible (fixed vs. narrow 3-column view).")
-    st.altair_chart(
-        _bar_chart(p_text, "P_text — text (GoEmotions → FER-7)"),
-        use_container_width=True,
-    )
-    st.altair_chart(
-        _bar_chart(p_face, "P_face — ResNet-50 (FER2013)"),
-        use_container_width=True,
-    )
-    st.altair_chart(
-        _bar_chart(p_fuse, f"Fused — α = {alpha:.2f}"),
-        use_container_width=True,
-    )
-
-    st.metric("Fused state b*", label_star)
-    for k in ("text_ms", "face_ms", "fusion_ms"):
-        if k in timings:
-            st.caption(f"{k}: {timings[k]:.1f} ms")
 
     t_gen0 = time.perf_counter()
     with st.spinner("Generating empathetic response (FLAN-T5)…"):
         syn = cached_synth()
         response = syn.generate(utterance, label_star, p_fused=p_fuse)
     timings["t5_ms"] = (time.perf_counter() - t_gen0) * 1000.0
-    st.markdown("### Empathetic response (R)")
-    st.markdown(
-        f'<div class="card"><p style="margin:0; font-size:1.1rem; line-height:1.5;">{response}</p></div>',
-        unsafe_allow_html=True,
-    )
-    st.caption(f"FLAN-T5 generation: {timings.get('t5_ms', 0):.1f} ms")
-    st.caption(
-        f"End-to-end (this run) ≈ {sum(v for v in timings.values()):.0f} ms (text + face + fusion + T5). "
-        "Doherty threshold for responsiveness is often cited as ~400 ms; heavy models on CPU can exceed it."
-    )
+
+    st.markdown("---")
+    st.markdown('<p class="section-title">Results</p>', unsafe_allow_html=True)
+
+    res_left, res_right = st.columns([1, 1.15], gap="large")
+
+    with res_left:
+        if image is not None:
+            st.image(
+                image,
+                caption=(
+                    f"Captured face frame · {vision_branch_label} branch · "
+                    f"face argmax: {FER7_LABELS[t_arg_face]}"
+                ),
+                use_container_width=True,
+            )
+        else:
+            st.info(
+                f"No face image provided — using a uniform face prior (1/7 per class). "
+                f"Vision branch: {vision_branch_label}."
+            )
+
+        st.markdown(f"**You said (U):** _{utterance.strip()}_")
+
+        if dissonant:
+            st.markdown(
+                f'<p><span class="badge-dissonance">Affective dissonance</span> '
+                f"text: <b>{FER7_LABELS[t_arg_text]}</b> · face: <b>{FER7_LABELS[t_arg_face]}</b></p>",
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                '<p><span class="badge-congruent">Congruent signals</span> '
+                "(same argmax for text and face)</p>",
+                unsafe_allow_html=True,
+            )
+
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Text argmax", FER7_LABELS[t_arg_text])
+        m2.metric("Face argmax", FER7_LABELS[t_arg_face])
+        m3.metric(f"Fused (α={alpha:.2f})", label_star)
+
+        st.markdown("**Empathetic response (R)**")
+        st.markdown(
+            f'<div class="card"><p style="margin:0; font-size:1.05rem; line-height:1.5;">{response}</p></div>',
+            unsafe_allow_html=True,
+        )
+
+        total_ms = sum(v for v in timings.values())
+        st.caption(
+            f"text {timings['text_ms']:.0f} ms · face {timings['face_ms']:.0f} ms · "
+            f"fusion {timings['fusion_ms']:.1f} ms · FLAN-T5 {timings['t5_ms']:.0f} ms · "
+            f"end-to-end ≈ {total_ms:.0f} ms (Doherty threshold ~400 ms)."
+        )
+
+    with res_right:
+        st.altair_chart(
+            _bar_chart(p_text, "P_text — RoBERTa (GoEmotions → FER-7)", compact=True),
+            use_container_width=True,
+        )
+        st.altair_chart(
+            _bar_chart(p_face, "P_face — ResNet-50 (FER2013)", compact=True),
+            use_container_width=True,
+        )
+        st.altair_chart(
+            _bar_chart(p_fuse, f"Fused — α·P_text + (1−α)·P_face,  α = {alpha:.2f}", compact=True),
+            use_container_width=True,
+        )
 
     with st.expander("Debug: numeric vectors"):
         debug_df = pd.DataFrame(
