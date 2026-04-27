@@ -1,0 +1,44 @@
+\begin{table*}[t]
+  \small
+  \centering
+  \caption{Per-class qualitative cases. One real FER2013 test image per FER-7 gold class, paired with the emotion-matched congruent template as text. We list the predicted FER-7 class at $\alpha\!=\!1$ (text-only), $\alpha\!=\!0.5$ (fused), and $\alpha\!=\!0$ (face-only) using the baseline ElenaRyumina ResNet-50 face branch.}
+  \label{tab:qualimages}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}c l p{0.46\textwidth} c c c@{}}
+    \toprule
+    \textbf{Image} & \textbf{Gold} & \textbf{User text $U$} & \textbf{$\alpha\!=\!1$} & \textbf{$\alpha\!=\!0.5$} & \textbf{$\alpha\!=\!0$} \\
+    \midrule
+    \includegraphics[width=1.4cm]{qual_images/0_angry.png} & Angry & I am absolutely furious and enraged; this is unacceptable and I will not stand for it. & Angry & Angry & Happy \\
+    \includegraphics[width=1.4cm]{qual_images/1_disgust.png} & Disgust & That is completely disgusting, I feel revolted and sickened by what I am seeing. & Disgust & Disgust & Happy \\
+    \includegraphics[width=1.4cm]{qual_images/2_fear.png} & Fear & I am terrified and panicked; I feel deep fear and anxiety about this situation right now. & Fear & Fear & Happy \\
+    \includegraphics[width=1.4cm]{qual_images/3_happy.png} & Happy & I am overjoyed and delighted; I could not be happier with this amazing wonderful news today! & Happy & Happy & Happy \\
+    \includegraphics[width=1.4cm]{qual_images/4_sad.png} & Sad & I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me. & Sad & Sad & Happy \\
+    \includegraphics[width=1.4cm]{qual_images/5_surprise.png} & Surprise & I am so shocked and surprised I can barely process what just happened, this is incredible. & Surprise & Surprise & Angry \\
+    \includegraphics[width=1.4cm]{qual_images/6_neutral.png} & Neutral & It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me. & Happy & Happy & Happy \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+% --- FLAN-T5 empathetic responses (one per row) ---
+\begin{table*}[t]
+  \small
+  \centering
+  \caption{FLAN-T5 (small) empathetic responses for the per-class qualitative cases. The fused FER-7 class drives the prompt; sampling is seeded for reproducibility.}
+  \label{tab:qualresponses}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}l l p{0.72\textwidth}@{}}
+    \toprule
+    \textbf{Gold} & \textbf{Fused $b^{*}$} & \textbf{Generated empathetic reply $R$} \\
+    \midrule
+    Angry & Angry & I hear that you are angry. What do you mean by "I will not stand for it"? \\
+    Disgust & Disgust & Is it a bad thing to be seeing what you're seeing, or is it disgusting? \\
+    Fear & Fear & I hear you are scared and anxious about this situation right now. What is the cause of your fear? \\
+    Happy & Happy & I hear that you are happy and excited. What do you mean by "overjoyed"? \\
+    Sad & Sad & Is everything gray and empty to me? (i) Yes. (ii) No. \\
+    Surprise & Surprise & I hear that you're so shocked and surprised I can barely process what just happened, this is incredible. \\
+    Neutral & Happy & Is it a normal quiet day, or is there something in particular happening to me? \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

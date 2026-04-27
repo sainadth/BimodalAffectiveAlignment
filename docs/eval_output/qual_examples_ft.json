@@ -1,0 +1,97 @@
+{
+  "vision_branch": "fine-tuned (fer2013_finetune.pt)",
+  "split": "test",
+  "rows": [
+    {
+      "y": 0,
+      "gold": "Angry",
+      "image_relpath": "eval_output/qual_images_ft/0_angry.png",
+      "image_for_latex": "qual_images_ft/0_angry.png",
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "pred_alpha_1.0_text": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "pred_alpha_0.0_face": "Angry",
+      "p_text_top": 0.8542830322625987,
+      "p_face_top": 0.9830838441848755,
+      "response_R": null
+    },
+    {
+      "y": 1,
+      "gold": "Disgust",
+      "image_relpath": "eval_output/qual_images_ft/1_disgust.png",
+      "image_for_latex": "qual_images_ft/1_disgust.png",
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "pred_alpha_1.0_text": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "pred_alpha_0.0_face": "Angry",
+      "p_text_top": 0.7052533808436299,
+      "p_face_top": 0.5871874690055847,
+      "response_R": null
+    },
+    {
+      "y": 2,
+      "gold": "Fear",
+      "image_relpath": "eval_output/qual_images_ft/2_fear.png",
+      "image_for_latex": "qual_images_ft/2_fear.png",
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "pred_alpha_1.0_text": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "pred_alpha_0.0_face": "Angry",
+      "p_text_top": 0.7835218638106289,
+      "p_face_top": 0.47291597723960876,
+      "response_R": null
+    },
+    {
+      "y": 3,
+      "gold": "Happy",
+      "image_relpath": "eval_output/qual_images_ft/3_happy.png",
+      "image_for_latex": "qual_images_ft/3_happy.png",
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "pred_alpha_1.0_text": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "pred_alpha_0.0_face": "Happy",
+      "p_text_top": 0.9439268871651572,
+      "p_face_top": 0.9811092615127563,
+      "response_R": null
+    },
+    {
+      "y": 4,
+      "gold": "Sad",
+      "image_relpath": "eval_output/qual_images_ft/4_sad.png",
+      "image_for_latex": "qual_images_ft/4_sad.png",
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "pred_alpha_1.0_text": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "pred_alpha_0.0_face": "Angry",
+      "p_text_top": 0.8722565534654012,
+      "p_face_top": 0.7380692958831787,
+      "response_R": null
+    },
+    {
+      "y": 5,
+      "gold": "Surprise",
+      "image_relpath": "eval_output/qual_images_ft/5_surprise.png",
+      "image_for_latex": "qual_images_ft/5_surprise.png",
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "pred_alpha_1.0_text": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "pred_alpha_0.0_face": "Sad",
+      "p_text_top": 0.6621683385239856,
+      "p_face_top": 0.3418668210506439,
+      "response_R": null
+    },
+    {
+      "y": 6,
+      "gold": "Neutral",
+      "image_relpath": "eval_output/qual_images_ft/6_neutral.png",
+      "image_for_latex": "qual_images_ft/6_neutral.png",
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "pred_alpha_1.0_text": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "pred_alpha_0.0_face": "Angry",
+      "p_text_top": 0.7888903468400553,
+      "p_face_top": 0.3393670618534088,
+      "response_R": null
+    }
+  ]
+}

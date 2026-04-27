@@ -1,0 +1,101 @@
+text,f0,f1,f2,f3,f4,f5,f6,note,intended
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=0 y=0 text_class=1,Angry
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=1 y=3 text_class=5,Happy
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=2 y=6 text_class=2,Neutral
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=3 y=2 text_class=6,Fear
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=4 y=5 text_class=3,Surprise
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=5 y=1 text_class=0,Disgust
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=6 y=4 text_class=5,Sad
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=7 y=0 text_class=2,Angry
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=8 y=3 text_class=6,Happy
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=9 y=6 text_class=3,Neutral
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=10 y=2 text_class=0,Fear
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=11 y=5 text_class=4,Surprise
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=12 y=1 text_class=2,Disgust
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=13 y=4 text_class=6,Sad
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=14 y=0 text_class=3,Angry
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=15 y=3 text_class=0,Happy
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=16 y=6 text_class=4,Neutral
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=17 y=2 text_class=1,Fear
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=18 y=5 text_class=6,Surprise
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=19 y=1 text_class=3,Disgust
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=20 y=4 text_class=0,Sad
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=21 y=0 text_class=4,Angry
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=22 y=3 text_class=1,Happy
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=23 y=6 text_class=5,Neutral
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=24 y=2 text_class=3,Fear
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=25 y=5 text_class=0,Surprise
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=26 y=1 text_class=4,Disgust
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=27 y=4 text_class=1,Sad
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=28 y=0 text_class=5,Angry
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=29 y=3 text_class=2,Happy
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=30 y=6 text_class=0,Neutral
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=31 y=2 text_class=4,Fear
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=32 y=5 text_class=1,Surprise
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=33 y=1 text_class=5,Disgust
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=34 y=4 text_class=2,Sad
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=35 y=0 text_class=6,Angry
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=36 y=3 text_class=4,Happy
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=37 y=6 text_class=1,Neutral
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=38 y=2 text_class=5,Fear
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=39 y=5 text_class=2,Surprise
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=40 y=1 text_class=6,Disgust
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=41 y=4 text_class=3,Sad
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=42 y=0 text_class=1,Angry
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=43 y=3 text_class=5,Happy
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=44 y=6 text_class=2,Neutral
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=45 y=2 text_class=6,Fear
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=46 y=5 text_class=3,Surprise
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=47 y=1 text_class=0,Disgust
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=48 y=4 text_class=5,Sad
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=49 y=0 text_class=2,Angry
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=50 y=3 text_class=6,Happy
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=51 y=6 text_class=3,Neutral
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=52 y=2 text_class=0,Fear
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=53 y=5 text_class=4,Surprise
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=54 y=1 text_class=2,Disgust
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=55 y=4 text_class=6,Sad
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=56 y=0 text_class=3,Angry
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=57 y=3 text_class=0,Happy
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=58 y=6 text_class=4,Neutral
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=59 y=2 text_class=1,Fear
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=60 y=5 text_class=6,Surprise
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=61 y=1 text_class=3,Disgust
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=62 y=4 text_class=0,Sad
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=63 y=0 text_class=4,Angry
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=64 y=3 text_class=1,Happy
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=65 y=6 text_class=5,Neutral
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=66 y=2 text_class=3,Fear
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=67 y=5 text_class=0,Surprise
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=68 y=1 text_class=4,Disgust
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=69 y=4 text_class=1,Sad
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=70 y=0 text_class=5,Angry
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=71 y=3 text_class=2,Happy
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=72 y=6 text_class=0,Neutral
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=73 y=2 text_class=4,Fear
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=74 y=5 text_class=1,Surprise
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=75 y=1 text_class=5,Disgust
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=76 y=4 text_class=2,Sad
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=77 y=0 text_class=6,Angry
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=78 y=3 text_class=4,Happy
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=79 y=6 text_class=1,Neutral
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=80 y=2 text_class=5,Fear
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=81 y=5 text_class=2,Surprise
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=82 y=1 text_class=6,Disgust
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=83 y=4 text_class=3,Sad
+"That is completely disgusting, I feel revolted and sickened by what I am seeing.",1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=84 y=0 text_class=1,Angry
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=85 y=3 text_class=5,Happy
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=86 y=6 text_class=2,Neutral
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=87 y=2 text_class=6,Fear
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=88 y=5 text_class=3,Surprise
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=89 y=1 text_class=0,Disgust
+"I am so shocked and surprised I can barely process what just happened, this is incredible.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=90 y=4 text_class=5,Sad
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=91 y=0 text_class=2,Angry
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=92 y=3 text_class=6,Happy
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,0.0,0.0,0.0,0.0,0.0,0.0,1.0,synthetic k=93 y=6 text_class=3,Neutral
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,1.0,0.0,0.0,0.0,0.0,synthetic k=94 y=2 text_class=0,Fear
+"I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",0.0,0.0,0.0,0.0,0.0,1.0,0.0,synthetic k=95 y=5 text_class=4,Surprise
+I am terrified and panicked; I feel deep fear and anxiety about this situation right now.,0.0,1.0,0.0,0.0,0.0,0.0,0.0,synthetic k=96 y=1 text_class=2,Disgust
+It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.,0.0,0.0,0.0,0.0,1.0,0.0,0.0,synthetic k=97 y=4 text_class=6,Sad
+I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!,1.0,0.0,0.0,0.0,0.0,0.0,0.0,synthetic k=98 y=0 text_class=3,Angry
+I am absolutely furious and enraged; this is unacceptable and I will not stand for it.,0.0,0.0,0.0,1.0,0.0,0.0,0.0,synthetic k=99 y=3 text_class=0,Happy

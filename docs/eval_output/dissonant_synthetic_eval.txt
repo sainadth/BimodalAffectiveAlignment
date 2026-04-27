@@ -1,0 +1,8 @@
+Loading GoEmotions model (first time may download weights)…
+============================================================
+Accuracy vs `intended` (n=100 (report: synthetic dissonant set; intended = face one-hot label)):
+  α=1 (text only): 3/100 = 0.030
+  α=0.5 (fused): 100/100 = 1.000
+  α=0 (face only): 100/100 = 1.000
+  Note: `intended` is a design choice (which modality encodes the user's true state for each row).
+Wrote docs/eval_output/dissonant_results.json

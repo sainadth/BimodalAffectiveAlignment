@@ -1,0 +1,21 @@
+\begin{table*}[t]
+  \small
+  \centering
+  \caption{Per-class qualitative cases. One real FER2013 test image per FER-7 gold class, paired with the emotion-matched congruent template as text. We list the predicted FER-7 class at $\alpha\!=\!1$ (text-only), $\alpha\!=\!0.5$ (fused), and $\alpha\!=\!0$ (face-only) using the fine-tuned (fer2013\_finetune.pt) face branch.}
+  \label{tab:qualimagesft}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}c l p{0.46\textwidth} c c c@{}}
+    \toprule
+    \textbf{Image} & \textbf{Gold} & \textbf{User text $U$} & \textbf{$\alpha\!=\!1$} & \textbf{$\alpha\!=\!0.5$} & \textbf{$\alpha\!=\!0$} \\
+    \midrule
+    \includegraphics[width=1.4cm]{qual_images_ft/0_angry.png} & Angry & I am absolutely furious and enraged; this is unacceptable and I will not stand for it. & Angry & Angry & Angry \\
+    \includegraphics[width=1.4cm]{qual_images_ft/1_disgust.png} & Disgust & That is completely disgusting, I feel revolted and sickened by what I am seeing. & Disgust & Disgust & Angry \\
+    \includegraphics[width=1.4cm]{qual_images_ft/2_fear.png} & Fear & I am terrified and panicked; I feel deep fear and anxiety about this situation right now. & Fear & Fear & Angry \\
+    \includegraphics[width=1.4cm]{qual_images_ft/3_happy.png} & Happy & I am overjoyed and delighted; I could not be happier with this amazing wonderful news today! & Happy & Happy & Happy \\
+    \includegraphics[width=1.4cm]{qual_images_ft/4_sad.png} & Sad & I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me. & Sad & Sad & Angry \\
+    \includegraphics[width=1.4cm]{qual_images_ft/5_surprise.png} & Surprise & I am so shocked and surprised I can barely process what just happened, this is incredible. & Surprise & Surprise & Sad \\
+    \includegraphics[width=1.4cm]{qual_images_ft/6_neutral.png} & Neutral & It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me. & Happy & Happy & Angry \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

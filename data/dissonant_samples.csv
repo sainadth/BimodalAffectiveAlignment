@@ -1,0 +1,4 @@
+text,f0,f1,f2,f3,f4,f5,f6,note,intended
+"I'm fine, really.",0,0,0,0,0.85,0,0.15,"Low text affect vs sad-leaning face; human gold = trust facial distress.",Sad
+"I can't believe it!",0,0,0,0.85,0,0.15,0,"Happy-looking face vs surprise-like words; gold = verbal surprise (dissonant case).",Surprise
+"Yeah, great job.",0.6,0,0,0.35,0,0,0.05,"Positive words vs frustrated face; gold = masked frustration.",Angry

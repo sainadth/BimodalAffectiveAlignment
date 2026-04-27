@@ -1,0 +1,36 @@
+ACM-style report (2-page target): docs/bimodal_report.tex
+=============================================================
+
+The report uses the standard LaTeX class "acmart" in sigconf + nonacm mode, which
+produces a two-column ACM-style article (typical of ACM conference short papers).
+Front matter includes: title, author block, abstract, \maketitle, CCS concepts,
+and keywords, followed by the body (Introduction with subsections, Formulation
+with equation, Method subsections, Implementation, Experiments, Table*, Conclusion,
+data availability) and the bibliography.
+
+Build (from the docs/ folder):
+  pdflatex bimodal_report
+  pdflatex bimodal_report
+
+(Run twice to settle references/cross-refs.)
+
+Requirements:
+  - A full TeX Live (or MacTeX) install that includes the "acmart" package.
+  - If "acmart" is missing: install texlive-acm or use Overleaf:
+    New Project -> ACM Conference Template -> set "non-acm" / nonacm option in
+    document class, then paste in bimodal_report.tex.
+
+The bibliography is inline (thebibliography) so BibTeX is not required.
+
+Image dependencies (per-class qualitative table):
+  Table tab:qualimages uses real FER2013 thumbnails saved by
+    python scripts/build_qualitative_table.py
+  which writes PNGs to docs/eval_output/qual_images/ and a LaTeX table to
+  docs/eval_output/qual_table.tex. The .tex already inlines the table contents.
+  When uploading to Overleaf, also upload the qual_images/ folder so the
+  \includegraphics{qual_images/*.png} paths resolve. The report sets
+    \graphicspath{{eval_output/}{./}}
+  so the folder can sit either at docs/eval_output/qual_images/ (local layout)
+  or directly at qual_images/ (typical Overleaf root layout).
+
+Before submission, replace the placeholder author block and email in the .tex file.

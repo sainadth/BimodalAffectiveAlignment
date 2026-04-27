@@ -1,0 +1,13 @@
+{
+  "n": 3589,
+  "split": "test",
+  "limit_requested": 5000,
+  "vision_branch": "baseline ElenaRyumina ResNet-50",
+  "rubric": "P_face from ResNet on real image; P_text from mismatched CONGRUENT template; gold = dataset y.",
+  "by_alpha": {
+    "1.0_text": 0.0395653385344107,
+    "0.5_fused": 0.04318751741432154,
+    "0.0_face": 0.2309835608804681
+  },
+  "rows": []
+}

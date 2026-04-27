@@ -1,0 +1,99 @@
+# ──────────────────────────────────────────────────────────────────────
+#  Bimodal Affective Alignment — .gitignore
+# ──────────────────────────────────────────────────────────────────────
+
+# Python bytecode and packaging
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Test, type-check, and coverage caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Local secrets (the .env.example template is committed; .env is not)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Hugging Face / dataset caches if a user mirrors them into the repo
+.huggingface/
+hf_cache/
+.cache/
+
+# Fine-tuned model weights (regenerate with scripts/finetune_fer2013.py).
+# Keep the JSON metadata sidecar so reviewers can see hyperparameters
+# without having to re-train.
+checkpoints/*.pt
+checkpoints/*.pth
+checkpoints/*.bin
+checkpoints/*.safetensors
+!checkpoints/.gitkeep
+!checkpoints/*.json
+
+# Generated report artifacts (LaTeX intermediate + PDF). The .tex source
+# files in docs/ are committed; their compiled outputs are not.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+docs/*.pdf
+docs/main.pdf
+docs/bimodal_report.pdf
+
+# Slide deck build artifacts (the script regenerates these)
+docs/Bimodal_Affective_Alignment.pptx
+docs/slides_build.log
+
+# Long-running evaluation log files written under /tmp during development
+/tmp/*.log
+nohup.out
+
+# OS / editor metadata
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# IDE / Cursor / VS Code
+.vscode/
+.idea/
+.cursor/
+.cursorignore
+docs/superpowers/
+
+# Jupyter / notebook checkpoints
+.ipynb_checkpoints/

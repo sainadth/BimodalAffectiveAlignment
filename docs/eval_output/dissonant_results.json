@@ -1,0 +1,1012 @@
+{
+  "csv": "data/dissonant_eval_100.csv",
+  "n_scored": 100,
+  "rubric": "intended = FER-7 label; hand rows = human design; build_dissonant_eval_csv = face one-hot as physiology GT.",
+  "by_alpha": {
+    "1.0_text": 0.03,
+    "0.5_fused": 1.0,
+    "0.0_face": 1.0
+  },
+  "rows": [
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": true,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": true,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "That is completely disgusting, I feel revolted and sickened by what I am seeing.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Disgust",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am so shocked and surprised I can barely process what just happened, this is incredible.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Surprise",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": true,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Neutral",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Neutral",
+      "pred_alpha_0.5_fused": "Neutral",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Fear",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Fear",
+      "pred_alpha_0.5_fused": "Fear",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I feel heartbroken, deeply sad, and I could cry; everything feels gray and empty to me.",
+      "intended": "Surprise",
+      "pred_alpha_1_text": "Sad",
+      "pred_alpha_0_face": "Surprise",
+      "pred_alpha_0.5_fused": "Surprise",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am terrified and panicked; I feel deep fear and anxiety about this situation right now.",
+      "intended": "Disgust",
+      "pred_alpha_1_text": "Fear",
+      "pred_alpha_0_face": "Disgust",
+      "pred_alpha_0.5_fused": "Disgust",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me.",
+      "intended": "Sad",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Sad",
+      "pred_alpha_0.5_fused": "Sad",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am overjoyed and delighted; I could not be happier with this amazing wonderful news today!",
+      "intended": "Angry",
+      "pred_alpha_1_text": "Happy",
+      "pred_alpha_0_face": "Angry",
+      "pred_alpha_0.5_fused": "Angry",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    },
+    {
+      "text": "I am absolutely furious and enraged; this is unacceptable and I will not stand for it.",
+      "intended": "Happy",
+      "pred_alpha_1_text": "Angry",
+      "pred_alpha_0_face": "Happy",
+      "pred_alpha_0.5_fused": "Happy",
+      "match_1": false,
+      "match_0": true,
+      "match_0.5": true
+    }
+  ]
+}

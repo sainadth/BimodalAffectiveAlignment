@@ -1,0 +1,24 @@
+\begin{table*}[t]
+  \small
+  \centering
+  \caption{Dissonant qualitative cases. Real FER2013 test image (gold class) paired with the congruent template text of a deliberately mismatched FER-7 class. We list the predicted FER-7 class at $\alpha\!=\!1$ (text-only, expected to match the text class), $\alpha\!=\!0.5$ (fused), and $\alpha\!=\!0$ (face-only, expected to match the gold class) using the fine-tuned (fer2013\_finetune.pt) face branch. A check mark indicates the prediction matches the \emph{gold} face class. Local hit rates over these 10 rows: $\alpha\!=\!1$ 0/10, $\alpha\!=\!0.5$ 3/10, $\alpha\!=\!0$ 3/10.}
+  \label{tab:qualdissimagesft}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}c l l p{0.40\textwidth} c c c@{}}
+    \toprule
+    \textbf{Image} & \textbf{Gold} & \textbf{Text class} & \textbf{Mismatched user text $U$} & \textbf{$\alpha\!=\!1$} & \textbf{$\alpha\!=\!0.5$} & \textbf{$\alpha\!=\!0$} \\
+    \midrule
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/00_angry_vs_disgust.png} & Angry & Disgust & That is completely disgusting, I feel revolted and sickened by what I am seeing. & Disgust & Angry \checkmark & Angry \checkmark \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/01_surprise_vs_angry.png} & Surprise & Angry & I am absolutely furious and enraged; this is unacceptable and I will not stand for it. & Angry & Angry & Sad \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/02_neutral_vs_fear.png} & Neutral & Fear & I am terrified and panicked; I feel deep fear and anxiety about this situation right now. & Fear & Fear & Angry \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/03_sad_vs_disgust.png} & Sad & Disgust & That is completely disgusting, I feel revolted and sickened by what I am seeing. & Disgust & Angry & Angry \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/04_fear_vs_angry.png} & Fear & Angry & I am absolutely furious and enraged; this is unacceptable and I will not stand for it. & Angry & Angry & Angry \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/05_angry_vs_neutral.png} & Angry & Neutral & It is a normal quiet day; I feel pretty neutral and nothing in particular is happening to me. & Happy & Angry \checkmark & Angry \checkmark \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/06_sad_vs_surprise.png} & Sad & Surprise & I am so shocked and surprised I can barely process what just happened, this is incredible. & Surprise & Neutral & Neutral \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/07_happy_vs_surprise.png} & Happy & Surprise & I am so shocked and surprised I can barely process what just happened, this is incredible. & Surprise & Happy \checkmark & Happy \checkmark \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/08_angry_vs_happy.png} & Angry & Happy & I am overjoyed and delighted; I could not be happier with this amazing wonderful news today! & Happy & Happy & Fear \\
+    \includegraphics[width=1.4cm]{qual_dissonant_images_ft/09_happy_vs_angry.png} & Happy & Angry & I am absolutely furious and enraged; this is unacceptable and I will not stand for it. & Angry & Angry & Surprise \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

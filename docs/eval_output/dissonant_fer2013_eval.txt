@@ -1,0 +1,9 @@
+Device: mps
+Loading text + vision models…
+
+Dissonant eval on real images: n=100 | split=test
+  α=1 (text / mismatched template):     3/100 = 0.030
+  α=0.5 (fused):                        4/100 = 0.040
+  α=0 (face / ResNet on image):        22/100 = 0.220
+  Gold = FER2013 label; text is always mismatched (j != y) on purpose.
+Wrote docs/eval_output/dissonant_fer2013_results.json

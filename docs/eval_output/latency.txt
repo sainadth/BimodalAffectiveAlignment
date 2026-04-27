@@ -1,0 +1,12 @@
+Device: mps
+Loading models (first run may download weights)…
+
+Warmup=3 | Timed runs=15 | utterance length=49 chars
+--------------------------------------------------------
+  text_ms       mean=    21.8 ms   stdev=  4.26 ms
+  face_ms       mean=    17.4 ms   stdev=  3.18 ms
+  fusion_ms     mean=     0.1 ms   stdev=  0.00 ms
+  t5_ms         mean=    94.9 ms   stdev= 95.67 ms
+  e2e_ms        mean=   134.2 ms   stdev= 95.35 ms
+--------------------------------------------------------
+Mean end-to-end: 134.2 ms. Doherty threshold often cited ~400 ms for responsiveness; state your hardware (CPU/MPS/GPU) in the report.
