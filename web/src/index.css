@@ -1,0 +1,424 @@
+/* Conversation study — participant interface.
+   Palette is deliberately non-valenced: nothing in this UI is tinted warm or cool by
+   emotion, because colour coding would prime the judgement the study measures. */
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader.woff2') format('woff2-variations');
+  font-weight: 300 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument.woff2') format('woff2-variations');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #f5f6f4;
+  --raised: #ffffff;
+  --ink: #16191a;
+  --muted: #6e7674;
+  --faint: #9aa19e;
+  --line: #d8dcd8;
+  --line-soft: #e7eae6;
+  --petrol: #1f5e56;
+  --petrol-ink: #ffffff;
+  --alert: #8c3a2e;
+
+  --sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Newsreader', Iowan Old Style, Georgia, serif;
+
+  --measure: 34rem;
+  --step: 1.5rem;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101413;
+    --raised: #181d1c;
+    --ink: #e8ebe8;
+    --muted: #97a09d;
+    --faint: #6d7673;
+    --line: #2b3231;
+    --line-soft: #222827;
+    --petrol: #6fbcae;
+    --petrol-ink: #0c1110;
+    --alert: #e0907f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(2rem, 8vh, 5rem) 1.5rem 6rem;
+}
+
+/* ---- rhythm --------------------------------------------------------------- */
+
+.turnhead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  margin-bottom: calc(var(--step) * 1.75);
+}
+.turnhead span {
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.turnhead i {
+  flex: 1;
+  height: 1px;
+  background: var(--line-soft);
+  position: relative;
+}
+.turnhead i::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--done, 0%);
+  background: var(--petrol);
+  transition: width 0.5s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.lede {
+  font-size: 1.0625rem;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  max-width: 30rem;
+}
+.hint {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+.instruction {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  border-left: 2px solid var(--petrol);
+  padding: 0.125rem 0 0.125rem 1rem;
+  margin: 0 0 1.5rem;
+}
+
+/* ---- beat 1: write -------------------------------------------------------- */
+
+textarea {
+  width: 100%;
+  min-height: 7.5rem;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.875rem 1rem;
+  resize: vertical;
+}
+textarea::placeholder { color: var(--faint); font-style: italic; }
+textarea:focus-visible { outline: 2px solid var(--petrol); outline-offset: 1px; border-color: transparent; }
+
+.capture {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+.sendbar {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 7rem;
+}
+.lens {
+  width: min(100%, 17rem);
+  flex: none;
+}
+.lens video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--line-soft);
+  border-radius: 2px;
+  transform: scaleX(-1);
+}
+.lens p {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0.375rem 0 0;
+  line-height: 1.35;
+}
+
+.dictate {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  margin-top: 0.875rem;
+}
+.dictate button { padding: 0.5rem 1rem; font-size: 0.875rem; }
+.dictate button.recording {
+  border-color: var(--petrol);
+  color: var(--petrol);
+  font-weight: 600;
+}
+.dictate .hint, .dictate .notice { margin: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .dictate button.recording { animation: pulse 1.6s ease-in-out infinite; }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(31, 94, 86, 0.28); }
+  50% { box-shadow: 0 0 0 0.3125rem rgba(31, 94, 86, 0); }
+}
+
+/* ---- beat 2: feel --------------------------------------------------------- */
+
+.feel {
+  text-align: center;
+  padding: calc(var(--step) * 1.5) 0 var(--step);
+}
+.feel > p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+.feel h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.625rem;
+  line-height: 1.3;
+  margin: 0 0 2rem;
+}
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  margin-bottom: 2rem;
+}
+.feel .words { justify-content: center; }
+.words label {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.0625rem;
+  color: var(--muted);
+  padding: 0.25rem 0;
+  transition: color 0.15s;
+}
+.words label:hover { color: var(--ink); }
+.words input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.words span { display: inline-block; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+.words input:checked ~ span { color: var(--petrol); border-bottom-color: var(--petrol); font-weight: 500; }
+.words input:focus-visible ~ span { outline: 2px solid var(--petrol); outline-offset: 3px; border-radius: 1px; }
+
+/* ---- beat 3: read and rate ------------------------------------------------ */
+
+.echo {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 1.25rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+}
+
+.reply {
+  background: var(--raised);
+  border: 1px solid var(--line-soft);
+  border-radius: 2px;
+  padding: 1.5rem 1.5rem 1.625rem;
+  margin: 0 0 calc(var(--step) * 1.75);
+  font-family: var(--serif);
+  font-size: 1.3125rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reply { animation: settle 0.45s cubic-bezier(0.22, 0.8, 0.3, 1) both; }
+}
+@keyframes settle {
+  from { opacity: 0; transform: translateY(0.375rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* the scale: hairline track, no numbers, nothing shown until touched */
+.scale { margin: 0 0 2rem; }
+.scale > p {
+  font-size: 0.9375rem;
+  margin: 0 0 0.625rem;
+  color: var(--ink);
+}
+.scale input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.75rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.scale input[type='range']::-webkit-slider-runnable-track {
+  height: 1px;
+  background: var(--line);
+}
+.scale input[type='range']::-moz-range-track {
+  height: 1px;
+  background: var(--line);
+}
+.scale input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-top: -0.4375rem;
+  border-radius: 50%;
+  background: var(--petrol);
+  border: none;
+  transition: transform 0.12s;
+}
+.scale input[type='range']::-moz-range-thumb {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--petrol);
+  border: none;
+}
+.scale input[type='range']:active::-webkit-slider-thumb { transform: scale(1.25); }
+.scale input[type='range']:focus-visible { outline: 2px solid var(--petrol); outline-offset: 4px; border-radius: 2px; }
+.scale[data-unset='true'] input[type='range']::-webkit-slider-thumb {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.scale[data-unset='true'] input[type='range']::-moz-range-thumb {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.anchors {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: -0.25rem;
+}
+
+/* ---- controls ------------------------------------------------------------- */
+
+button {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  padding: 0.6875rem 1.375rem;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+button:hover:not(:disabled) { border-color: var(--muted); }
+button:focus-visible { outline: 2px solid var(--petrol); outline-offset: 2px; }
+button.primary {
+  background: var(--petrol);
+  color: var(--petrol-ink);
+  border-color: var(--petrol);
+}
+button.primary:hover:not(:disabled) { filter: brightness(1.12); }
+button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: var(--step);
+}
+
+/* ---- prose (consent, debrief) --------------------------------------------- */
+
+.prose {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+.prose h3 {
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 1.25rem;
+}
+.prose p { margin: 0 0 1.125rem; }
+.prose strong { font-weight: 600; }
+.prose ul { padding-left: 1.125rem; margin: 0 0 1.125rem; }
+.prose li { margin-bottom: 0.5rem; }
+
+.agree {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.agree input { margin-top: 0.3125rem; accent-color: var(--petrol); width: 1rem; height: 1rem; flex: none; }
+
+input[type='text'] {
+  font-family: var(--sans);
+  font-size: 1rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--raised);
+  color: var(--ink);
+  width: 100%;
+  max-width: 14rem;
+}
+input[type='text']:focus-visible { outline: 2px solid var(--petrol); outline-offset: 1px; }
+
+label.field {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 0.375rem;
+}
+
+/* ---- states --------------------------------------------------------------- */
+
+.notice { font-size: 0.875rem; color: var(--alert); margin: 0.875rem 0 0; }
+.closing { font-family: var(--serif); font-size: 1.25rem; line-height: 1.5; }
+.section-gap { margin-top: calc(var(--step) * 2); }
+.divider { border: 0; border-top: 1px solid var(--line-soft); margin: var(--step) 0; }
+
+@media (max-width: 30rem) {
+  .words { gap: 0.5rem 1.25rem; }
+  .reply { font-size: 1.1875rem; padding: 1.25rem; }
+  .feel h2 { font-size: 1.3125rem; }
+}

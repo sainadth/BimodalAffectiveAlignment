@@ -1,0 +1,18 @@
+% Auto-generated: scripts/build_meld_bimodal_table.py
+\begin{table}[t]
+  \centering
+  \caption{MELD test split, utterances with a detected face in the middle frame ($n=2583$ of 2610, 99.0\%). Top-1 accuracy, macro-F1, Wilson 95\% CI. Majority-class floor on the full split: 48.1\%. Fusion at $\alpha=0.5$.}
+  \label{tab:meld_bimodal}
+  \small
+  \begin{tabular}{@{}l r r l@{}}
+    \toprule
+    Mode & Top-1 (\%) & Macro-F1 & 95\% CI \\
+    \midrule
+    Text only & 42.9 & 0.278 & [41.0, 44.9] \\
+    Face only (baseline AffectNet) & 15.3 & 0.065 & [14.0, 16.8] \\
+    Fused $\alpha{=}0.5$ (baseline face) & 40.4 & 0.269 & [38.5, 42.3] \\
+    Face only (FER2013 fine-tuned) & 22.8 & 0.144 & [21.2, 24.4] \\
+    Fused $\alpha{=}0.5$ (fine-tuned face) & 37.7 & 0.229 & [35.9, 39.6] \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 import numpy as np
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
@@ -15,6 +17,8 @@ from bimodal_empathy.emotion_mapping import (
 
 class TextEmotionModel:
     def __init__(self, model_id: str = GOEMOTIONS_MODEL_ID, device: str | None = None):
+        # Aggregation of the 28 GoEmotions scores into FER-7 bins; see emotion_mapping.COLLAPSE_METHODS.
+        self.collapse_method = os.environ.get("COLLAPSE_METHOD", "sum").strip().lower()
         self.device = device or device_preference()
         self.model_id = model_id
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -53,7 +57,7 @@ class TextEmotionModel:
         else:
             raw = torch.softmax(logits, dim=-1).float().cpu().numpy()
 
-        p7 = collapse_goemotions_to_fer7(raw, self.id2label)
+        p7 = collapse_goemotions_to_fer7(raw, self.id2label, method=self.collapse_method)
         return p7, raw, {"model_id": self.model_id, "n_labels": int(raw.shape[0])}
 
 

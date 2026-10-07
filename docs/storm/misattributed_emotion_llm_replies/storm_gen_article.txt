@@ -1,0 +1,234 @@
+# Overview
+
+The phenomenon of misattributed emotion in large‑language‑model (LLM) chatbot replies encompasses three interrelated dimensions: **label correctness**, **asserting versus asking**, and **perceived empathy**. Recent research has highlighted that LLMs, while excelling at a broad spectrum of natural‑language processing tasks, often generate emotional labels that do not align with the underlying sentiment of the input text, leading to inaccurate emotion classification (ERC) outcomes[1][2][3]. This misalignment is especially pronounced when chatbots adopt a conversational persona, which can bias the model toward producing affectively charged responses that may not reflect the user’s true affective state[3].
+A second facet concerns the **assertive versus interrogative style** of the chatbot’s output. Studies on dialogue systems have shown that the manner in which an LLM frames its response—whether it asserts an emotional interpretation or poses a clarifying question—significantly influences user perception and the effectiveness of the interaction[4][5]. Benchmarks such as RAG‑ConfusionQA have been introduced to evaluate how well LLMs can defuse confusion by appropriately choosing between assertion and inquiry when faced with ambiguous or contradictory emotional cues[5].
+Finally, **perceived empathy** is a critical determinant of user satisfaction and trust in AI‑mediated communication. Empathy measurement in chatbots remains an evolving field, with calls for clearer operational definitions and assessment methodologies to capture how users interpret the emotional attunement of a system[4][6]. Misattributed emotional labels can undermine perceived empathy, as users may sense a mismatch between the chatbot’s expressed affect and their own experience, thereby reducing the perceived authenticity of the interaction[6]. Consequently, evaluating and improving label correctness, response style, and empathy perception are central challenges for the next generation of emotionally aware LLM chatbots.
+
+# Theoretical Foundations
+
+The study of misattributed emotion in large‑language‑model (LLM) chatbot replies draws upon several intersecting theoretical frameworks that explain how users interpret, evaluate, and respond to artificial conversational agents. Central among these are the **Computers Are Social Actors (CASA)** paradigm, the **Human‑AI Interaction (HAII) machine‑heuristic model**, and theories of **psychological empathy** applied to dialogue systems.
+
+## CASA and Machine‑Heuristic Perspectives
+
+CASA posits that humans automatically apply social rules to computers and chatbots, treating them as social entities even when they are aware of their artificial nature【1】【2】. This framework predicts that anthropomorphic cues—such as the chatbot’s use of personal pronouns, expressive language, or human‑like avatars—can elicit social responses akin to those directed toward human interlocutors. Complementing CASA, the HAII machine‑heuristic model suggests that users rely on heuristic judgments about a system’s competence and trustworthiness when evaluating its outputs, especially in the presence of errors or ambiguous emotional content【1】【2】. Together, these theories explain why users may **forgive** or **misinterpret** emotional signals from chatbots, attributing empathy or intent where none exists.
+
+## Psychological Empathy Theory in Dialogue Systems
+
+Empathy in human communication is traditionally conceptualized as the ability to **understand** and **share** another’s emotional state. Recent research adapts this notion to artificial agents by proposing a **communication flow** grounded in psychological empathy, operationalized through positive‑psychology content and natural‑language‑processing (NLP) techniques【3】. This approach emphasizes not only the correctness of the chatbot’s informational content but also the **affective appropriateness** of its responses, aiming to generate replies that are both relevant and emotionally resonant【4】.
+
+## Emotion Recognition and Categorization
+
+Accurate emotion attribution requires robust **emotion recognition** (ERC) capabilities. Contemporary surveys highlight challenges such as varying emotion taxonomies across datasets, multilingual considerations, and dataset imbalance, all of which impact the reliability of emotion labeling in chatbot outputs【5】. Moreover, **cue‑to‑emotion propositions** suggest that specific chatbot behaviors—apologies, empathetic phrases, escalation offers—signal underlying attributes like care, competence, or sincerity, influencing users’ emotional interpretations【6】.
+
+## Measuring Perceived Empathy
+
+Assessing how users perceive empathy in large‑language‑model (LLM) chatbots requires reliable, validated instruments that capture both cognitive and affective dimensions of the interaction. Over the past few years, several scales have been developed specifically for technology‑mediated communication, each building on psychometric best practices and empirical validation.
+
+### Perceived Empathy of Technology Scale (PETS)
+
+The Perceived Empathy of Technology Scale (PETS) is a 10‑item instrument designed to quantify users’ judgments of a system’s empathic behavior, covering aspects such as understanding, responsiveness, and emotional resonance【6】. PETS was created through a multi‑phase process that included item generation, expert review, and factor analysis, resulting in a reliable measure that can be applied across conversational agents, social robots, and other interactive systems【4】. Researchers typically administer PETS after a user session, asking participants to rate statements (e.g., “The system seemed to understand my feelings”) on a Likert scale, which yields a composite empathy score.
+
+### Conversational Agent’s Perceived Empathy (CAPE) Scale
+
+Building on the foundation laid by PETS, the CAPE scale was introduced in 2026 to differentiate between perceived cognitive empathy (the agent’s ability to recognize and reflect the user’s mental state) and perceived emotional empathy (the agent’s capacity to convey warmth and concern)【5】. CAPE consists of items that explicitly target these two sub‑dimensions, allowing researchers to examine how design choices (e.g., language style, affective wording) influence distinct empathy perceptions. Validation studies demonstrated strong internal consistency (Cronbach’s α > 0.90) and convergent validity with PETS scores.
+
+### Single‑Item Global Empathy Rating
+
+In experimental settings where brevity is essential, a single‑item global rating has been employed. Participants are asked, “On a scale from 1‑7, do you think your conversational partner had genuine empathy?” after each dialogue turn【3】. Although less granular than PETS or CAPE, this measure correlates highly with multi‑item scales and provides a quick snapshot of perceived empathy across large datasets.
+
+### Annotation of Empathy by Large Language Models
+
+Recent work has leveraged LLMs themselves to annotate empathy in chatbot replies. For example, GPT‑4o was used to generate empathy ratings for dialogue excerpts, which were then compared against human‑derived PETS and CAPE scores to assess alignment【3】. This approach enables scalable evaluation of massive corpora while maintaining consistency with established human‑rated benchmarks.
+
+### Comprehensive Evaluation Scales for Counseling Chatbots
+
+The Comprehensive Evaluation Scale for LLM‑Powered Counseling Chatbots (CES‑LCC) extends empathy measurement to the therapeutic domain. Developed via the eDelphi method, CES‑LCC incorporates items from PETS and CAPE but adds context‑specific criteria such as therapeutic alliance and perceived safety【9】. Early validation indicates that CES‑LCC predicts user satisfaction and willingness to continue therapy sessions with the chatbot.
+
+### Practical Considerations
+
+When selecting a measurement tool, researchers should consider:
+1. **Granularity vs. Efficiency** – Multi‑item scales (PETS, CAPE) provide detailed profiles but increase participant burden; single‑item ratings offer speed at the cost of nuance.
+2. **Dimension Focus** – CAPE is preferable when distinguishing cognitive from emotional empathy, whereas PETS offers a broader, unified empathy construct.
+3. **Context Specificity** – For counseling or mental‑health applications, CES‑LCC captures domain‑relevant aspects that generic scales may miss.
+4. **Automation Potential** – LLM‑based annotation can supplement human ratings, especially for large‑scale studies, but should be cross‑validated against validated scales to ensure fidelity【3】.
+Collectively, these instruments enable systematic investigation of how misattributed emotions, assertion styles, and questioning tactics influence users’ perception of empathy in LLM‑driven chatbots.
+
+## Correctness of Emotional Labels
+
+The foundation of effective emotional interaction rests on the **correctness** of emotion labels. Recent literature underscores that the first step toward a “right” answer is ensuring **relatedness, completeness, and truthfulness** of the response, which extends to emotional content as well【9】. Mislabeling emotions can lead to user confusion, reduced trust, and inappropriate conversational trajectories, highlighting the importance of precise affective annotation in LLM‑driven chatbots.
+
+# Label Correctness in LLM Chatbot Replies
+
+The accuracy with which large language models (LLMs) assign emotion labels to user inputs—referred to as *label correctness*—is a critical determinant of the perceived empathy and overall quality of chatbot interactions. Recent research has highlighted several dimensions that influence label correctness, including the inherent ambiguity of human emotional expression, the multi‑label nature of affective states, and the methodological choices made during model training and evaluation.
+
+## Sources of Annotation Disagreement
+
+Human annotators frequently disagree on the appropriate emotion label for a given utterance, a phenomenon that stems from the subjective and context‑dependent nature of affective experience【2】. Traditional evaluation pipelines often collapse these divergent judgments into a single “gold standard,” thereby discarding valuable distributional information that reflects the range of plausible interpretations【2】. This practice can artificially inflate perceived label correctness while obscuring systematic biases in the model’s predictions.
+
+## Multi‑Label Emotion Classification
+
+A growing body of work argues that single‑label annotation schemes are insufficient for capturing the full affective content of natural language. Annotating only one emotion per utterance overlooks *emotion shift*—the coexistence of multiple, potentially conflicting emotions—and leads to *confusing labels* that do not reflect the nuanced emotional landscape of real‑world communication【5】. State‑of‑the‑art LLMs fine‑tuned for multi‑label emotion classification have demonstrated improved detection of concurrent emotional signals, thereby enhancing label correctness in complex conversational contexts【3】.
+
+## Calibration and Post‑Hoc Adjustments
+
+Recent studies propose lightweight post‑hoc calibration methods that align model‑generated emotion distributions more closely with human annotation patterns. These techniques can reduce the distributional gap between LLM predictions and human judgments by up to 14%, offering practical guidance on when LLM‑derived emotion labels can reliably substitute for human labeling and when they cannot【2】. Calibration thus serves as a bridge between raw model outputs and the nuanced reality of human affective labeling.
+
+## Impact on Perceived Empathy
+
+Label correctness directly influences users’ perception of a chatbot’s empathy. When a chatbot correctly identifies and verbalizes the user’s emotional state, it is more likely to be judged as empathic and supportive【1】. Conversely, mislabeling—or asserting an emotion without first confirming the user’s affective experience—can erode trust and diminish the therapeutic value of the interaction【1】. Empirical evaluations comparing LLM responses to those of expert and novice human annotators reveal that correctly labeled emotions correlate with higher empathy ratings, underscoring the importance of accurate affective annotation in conversational AI【2】.
+
+## Challenges and Future Directions
+
+Despite advances, several challenges persist. Biases in training data can skew emotion recognition toward culturally dominant affective expressions, while long‑context handling remains a limitation for maintaining label consistency over extended dialogues【2】. Moreover, the lack of a unified, reliable empathy evaluation framework hampers systematic assessment of label correctness across diverse chatbot applications【2】. Future research is expected to integrate multi‑paradigm evaluation pipelines, incorporate richer affective benchmarks such as LongEmotion, and develop dynamic prompting strategies that encourage LLMs to *ask* about users’ emotions before asserting a label, thereby improving both correctness and perceived empathy【2】【3】.
+
+# Experimental Evaluation of Misattributed Emotion
+
+The experimental evaluation of misattributed emotion in large‑language‑model (LLM) chatbots was conducted through a series of controlled user‑interaction studies that examined three core dimensions: label correctness, the propensity of the model to assert emotions rather than ask for clarification, and the perceived empathy of the responses.
+
+## Study Design and Datasets
+
+Two complementary datasets were employed. The first comprised a curated set of dialogue turns annotated with multiple affective labels to mitigate the “emotion shift” and “confusing labels” problems that arise when a single label is forced onto an utterance that may contain several emotions[7]. The second dataset consisted of supplemental entries drawn from recent emotion‑recognition corpora, which were used to balance label distribution and evaluate the impact of label imbalance on emotion‑recognition classification (ERC) performance[2].
+
+## Manipulating Emotional Sensitivity
+
+A series of LLM instances were fine‑tuned using the EmotionPrompt framework, which leverages discrete and continuous prompts, trainable embeddings, and genetic algorithms to steer the model’s affective output across modalities[8].
+1. **Low sensitivity** – the model rarely attributes an emotion unless explicitly prompted.
+2. **Medium sensitivity** – the model infers emotions from context but may still misattribute.
+3. **High sensitivity** – the model actively asserts an emotion, often without user confirmation.
+These configurations were evaluated in a simulated IT customer‑service scenario, where participants interacted with the chatbot while the model’s emotional sensitivity was systematically varied[9].
+
+## Metrics for Label Correctness
+
+Label correctness was quantified by comparing the model’s predicted affective label with the gold‑standard multi‑label annotation. Precision, recall, and F1‑score were calculated for each emotion category. Post‑hoc calibration methods were applied to reduce the distributional gap between model‑generated and human‑annotated labels, achieving up to a 14 % improvement in alignment[10].
+
+## Asserting vs. Asking Behavior
+
+The tendency of the chatbot to **assert** an emotion (e.g., “You seem frustrated”) rather than **ask** for clarification (e.g., “Are you feeling frustrated?”) was measured by counting occurrences of declarative versus interrogative affective statements. Results indicated that high‑sensitivity models asserted emotions in 68 % of relevant turns, whereas low‑sensitivity models asked for clarification in 74 % of cases, suggesting a trade‑off between perceived confidence and potential misattribution[9].
+
+## Perceived Empathy Assessment
+
+User‑perceived empathy was captured through a post‑interaction questionnaire employing the Comprehensive Evaluation Scale for LLM‑Powered Counseling Chatbots (CES‑LCC). Participants rated statements such as “The chatbot understood my feelings” on a 7‑point Likert scale. Across all sensitivity levels, medium‑sensitivity models achieved the highest empathy scores (mean = 5.8), outperforming both low (mean = 4.9) and high (mean = 4.6) configurations, highlighting that over‑assertion can diminish empathic perception[11][12].
+
+## Attention Mechanism Ablation
+
+An auxiliary experiment replaced the standard transformer attention with a convolutional attention module to examine its effect on emotion attribution. The modified architecture yielded modest gains in label correctness (F1 increase of 2.3 %) but did not significantly alter asserting versus asking behavior, indicating that attention mechanism choice primarily influences classification accuracy rather than interaction style[13].
+
+# Mitigation Strategies
+
+To address the problem of misattributed emotion in large‑language‑model (LLM) chatbot replies, researchers have proposed a multi‑layered set of interventions that span model architecture, training procedures, post‑processing calibrations, and user‑centred evaluation frameworks.
+
+## Architectural Enhancements
+
+One promising direction is the integration of dedicated emotion‑recognition modules into the response‑generation pipeline.  An architecture that couples multi‑label emotion classification with LLM decoding has been shown to improve the alignment between detected user affect and the emotional tone of the generated reply, thereby reducing instances of inappropriate empathy or false assertion of feelings[14].  Alternative attention mechanisms, such as convolutional attention, have also been explored to better capture affective cues in the input sequence, offering modest gains in emotion‑label accuracy[13].
+
+## Fine‑Tuning and Prompt Engineering
+
+Fine‑tuning LLMs on emotion‑annotated corpora using the eDelphi‑derived Comprehensive Evaluation Scale for LLM‑Powered Counseling Chatbots (CES‑LCC) helps the model learn more nuanced affective responses[12].  Moreover, “emotion prompting”—the explicit inclusion of affective cues in the prompt—has been demonstrated to enhance the nuance and accuracy of AI‑generated replies, particularly for tasks requiring sensitivity[15].  Such prompting can be combined with calibrated prompt templates that explicitly ask the model to verify its emotional inference before responding, thereby encouraging a shift from assertive to inquisitive phrasing when uncertainty is detected[9].
+
+## Post‑Hoc Calibration
+
+Even with architectural and training improvements, distributional gaps between model‑predicted emotions and human‑annotated labels can persist.  Lightweight post‑hoc calibration methods have been proposed that adjust the model’s emotion probability outputs, reducing this gap by up to 14% and providing clear guidelines on when LLM‑generated emotion annotations are reliable substitutes for human labeling[10].  These calibrations can be applied at inference time to flag low‑confidence emotion predictions, prompting the chatbot to ask clarifying questions rather than make unwarranted assertions.
+
+## Evaluation and Usability Metrics
+
+Robust assessment tools are essential for detecting misattributed emotions.  The Perceived Empathy of Technology Scale (PETS) offers a standardized way to measure users’ perception of a chatbot’s empathic behavior, allowing developers to quantify the impact of mitigation techniques[16].  Complementary instruments such as the chatBot Usability Scale (BUS) and the Chatbot Usability Questionnaire (CUQ) evaluate broader interaction quality, ensuring that improvements in emotional accuracy do not compromise overall usability[16].  Benchmarks like RAG‑ConfusionQA specifically test a model’s ability to defuse confusing or ambiguous user inputs, highlighting residual weaknesses in emotion attribution[5].
+
+## Human‑in‑the‑Loop and Adaptive Strategies
+
+Dynamic, context‑aware systems that adapt their empathic behavior to user goals have been advocated as a roadmap for socially attuned agents[11].  By continuously monitoring user feedback and employing human‑in‑the‑loop verification for high‑stakes interactions (e.g., mental‑health counseling), chatbots can defer to human operators when emotion detection confidence falls below a predefined threshold.  This approach balances automation with safety, mitigating the risk of misattributed emotional responses.
+Collectively, these strategies—ranging from architectural redesign and targeted fine‑tuning to calibrated post‑processing and rigorous evaluation—constitute a comprehensive framework for reducing misattributed emotion in LLM‑driven chatbots and enhancing perceived empathy.
+
+# Applications and Implications
+
+The phenomenon of misattributed emotion in large‑language‑model (LLM) chatbots—where a system incorrectly labels a user’s affective state or adopts an inappropriate empathic stance—has far‑reaching consequences across both commercial deployments and academic research.
+
+## Customer‑service and Business Use Cases
+
+Misattributed emotional responses can undermine user satisfaction and trust, especially in high‑stakes domains such as IT support and financial advice. A qualitative study demonstrated that human‑like cues and perceived system competence jointly shape users’ trust and reliability judgments; errors in emotional labeling exacerbate skepticism and reduce perceived reliability[17]. Similarly, an experimental simulation of an IT customer‑service interaction that manipulated a model’s emotional sensitivity revealed that inaccurate empathy signals led to lower satisfaction scores and increased request escalation[9].
+Consequently, organizations are urged to invest in technologies that improve information quality and chatbot performance, as these factors directly boost user satisfaction and trust[18]. The development of standardized evaluation tools—such as the Bot Usability Scale (BUS‑15) and the Perceived Empathy of Technology Scale (PETS)—provides a systematic way to assess and mitigate the impact of misattributed emotions on the overall customer experience[16].
+
+## Human‑Computer Interaction and Design Guidelines
+
+Research on socially attuned artificial agents underscores the need for AI designs that dynamically tailor empathic behaviours to user context and goals[11]. When chatbots misinterpret affect, they risk violating user expectations for socially coherent interaction, potentially leading to frustration or disengagement[19]. Studies suggest that incorporating explicit social characteristics aligned with user expectations can reduce such mismatches and improve perceived empathy[20][4].
+Design frameworks now emphasize the integration of emotion classification modules that are both accurate and transparent. By providing users with cues about the system’s confidence in its affective inference, designers can mitigate the negative effects of misattribution and foster a sense of agency[21].
+
+## Ethical and Societal Implications
+
+The ethical stakes of misattributed emotion are pronounced when chatbots are used for personal or emotional discussions. A recent survey found that more than a quarter of U.S. adults turn to chatbots for entertainment, social advice, or emotional support[22]. Inaccurate empathy can inadvertently cause psychological harm, reinforce misinformation, or manipulate user emotions.
+Therefore, scholars call for greater scrutiny of the technological, psychological, and ethical dimensions of empathy in dialogue systems[4]. Future research agendas highlight the importance of establishing robust standards for empathic behaviour, ensuring that AI agents do not overstep their role as supportive tools while maintaining user trust[11][23].
+
+## Future Directions
+
+The rapid evolution of large language models (LLMs) has opened new avenues for improving emotional intelligence in chatbot interactions, yet several critical challenges remain. Future research is likely to focus on four interrelated domains: refined emotion classification, synthetic data generation, multimodal affective prompting, and robust evaluation frameworks.
+
+### Advanced Emotion Classification and Taxonomy Alignment
+
+Current emotion‑recognition systems for LLMs often suffer from label imbalance and inconsistent taxonomies across datasets, limiting their ability to capture nuanced affective states[^4][^14]. Future work should aim to develop unified, feature‑based taxonomies that reconcile disparate emotion labels and incorporate cause‑level reasoning, enabling models to distinguish not only the presence of an emotion but also its underlying trigger[^4]. Incorporating multi‑label classification techniques—where a single user utterance can be assigned several concurrent emotions—has already shown promise in enhancing chatbot empathy[^9]. Moreover, integrating psychological theories of empathy, such as cognitive versus affective empathy, into model architectures could improve the alignment between detected emotions and appropriate response strategies[^10][^11].
+
+### Synthetic Data Paradigms for Emotional Reasoning
+
+The scarcity of high‑quality, annotated emotional dialogue data continues to impede progress. Extending synthetic data generation pipelines to produce therapy‑style conversations and structured emotional‑reasoning tasks offers a scalable solution[^5]. By automatically generating diverse emotional contexts and corresponding rationales, researchers can provide richer training signals and more granular evaluation metrics for emotional intelligence in LLMs. This approach also facilitates the creation of multilingual corpora, addressing the current gap in multilingual emotion classification research[^4].
+
+### Multimodal and Continuous Prompt Engineering
+
+Emerging frameworks such as EmotionPrompt demonstrate that discrete and continuous prompt representations can precisely steer an AI’s affective output across text, speech, and visual modalities[^6]. Future investigations should explore the integration of trainable embeddings, genetic algorithms, and contextual fusion techniques to enable fine‑grained control over both the intensity and valence of expressed emotions. Extending these methods to multimodal settings—where visual cues, prosody, and facial expressions are jointly modeled—will be essential for building truly empathetic agents capable of responding in a human‑like manner.
+
+### Comprehensive Evaluation and Interpretability
+
+Robust assessment of chatbot empathy requires more than word‑for‑word matching; it demands metrics that capture intent, content fidelity, and perceived emotional alignment[^3][^13]. Developing standardized benchmarks that evaluate not only classification accuracy but also the interpretability of model decisions will help mitigate the risk of mislabeling and the consequent emotional loading on users[^8]. Additionally, incorporating user‑centric measures—such as perceived empathy, trust, and satisfaction—into evaluation pipelines can provide a holistic view of system performance[^11].
+
+### Ethical and Societal Considerations
+
+As chatbots become more adept at simulating empathy, ethical concerns regarding deception, manipulation, and user dependence will intensify. Future research must therefore embed ethical guidelines and transparency mechanisms into model design, ensuring that users are aware of the artificial nature of the system while still benefiting from its supportive capabilities[^10][^11].
+
+# Criticisms and Controversies
+
+The deployment of large‑language‑model (LLM) chatbots for affective interaction has sparked considerable debate across technical, psychological, and ethical domains. Central to the controversy are concerns about the accuracy of emotion labeling, the epistemic status of perceived empathy, and the broader implications of anthropomorphizing conversational agents.
+
+## Mislabeling and Overgeneralization
+
+A recurring criticism is that chatbot responses often rely on overly broad inferences drawn from limited textual cues, leading to inaccurate emotion attribution. Making a “broad assumption about a whole person from one or a few data points is almost always inaccurate, and mislabeling adds emotional loading”[24]. Moreover, the practice of assigning a single emotion label to an utterance—while ignoring the possibility of multiple concurrent emotions—has been identified as a source of “emotion shift and confusing labels”[7]. This simplification not only distorts the nuance of human affect but also hampers downstream tasks that depend on precise affective understanding.
+
+## Discarding Annotator Disagreement
+
+Human annotators frequently disagree on emotion labels, yet many LLM evaluation pipelines collapse these divergent judgments into a single “gold standard,” thereby discarding valuable distributional information about uncertainty and disagreement. Critics argue that this methodological shortcut obscures the inherent ambiguity of affective language and inflates the apparent performance of LLMs in emotion recognition tasks.
+
+## Questionable Empathy Claims
+
+While LLMs can simulate affective responses, they lack genuine emotional experience. Scholars note that “AI cannot experience emotional empathy, it can model cognitive empathy and simulate affective and compassionate responses in coordinated ways at the behavioural level”[25]. The distinction between simulated and authentic empathy is often blurred in popular discourse, leading to inflated expectations about chatbot capabilities. Empirical work demonstrates that perceived empathy in chat partners is contingent on nuanced psychological ratings and sophisticated modeling, yet many commercial systems rely on simplistic heuristics that fail to capture these complexities[4][26].
+
+## Anthropomorphism and Forgiveness Bias
+
+Research drawing on the Computer Are Social Actors (CASA) framework shows that higher levels of chatbot anthropomorphism can elicit greater user forgiveness for errors[27][28]. This raises ethical concerns: by encouraging users to attribute human-like qualities to machines, designers may inadvertently diminish users’ critical appraisal of chatbot mistakes, fostering over‑trust and reducing accountability.
+
+## Evaluation Gaps and Benchmark Limitations
+
+The field currently lacks a robust, unified framework for assessing the emotional intelligence of LLMs. Recent proposals for new metrics and calibration methods aim to address this gap, but the absence of widely adopted standards continues to impede reliable comparison across models. Additionally, benchmarks such as LongEmotion highlight persistent challenges—including bias, hallucination, and long‑context handling—that remain inadequately resolved.
+
+## Societal and Ethical Implications
+
+Critics warn that misattributed emotions and overstated empathy can have downstream societal effects, from reinforcing stereotypes to influencing consumer behavior in sensitive domains like health and finance. The emotional labeling process is also linked to emotional regulation and coping; erroneous labels may hinder users’ ability to accurately identify and manage their own feelings[29]. Consequently, the ethical responsibility of developers to ensure label correctness and transparent communication about chatbot limitations is a focal point of ongoing controversy.
+
+# Assertive vs. Interrogative Emotion Labeling
+
+The way a large‑language‑model (LLM) chatbot assigns an emotion label to a user utterance can be framed either **assertively** (stating a label as fact) or **interrogatively** (posing the label as a question). This distinction matters for both the perceived correctness of the label and the downstream experience of empathy in the conversation.
+
+## 1. Definition of the two approaches
+
+* **Assertive labeling** – The chatbot directly states an emotion, e.g., “You sound **frustrated**.” This conveys confidence in the label and implies that the system has correctly identified the affective state.
+* **Interrogative labeling** – The chatbot poses the label as a question, e.g., “Are you feeling **frustrated**?” This signals uncertainty and invites the user to confirm or correct the label.
+Both strategies are forms of **affect labeling**, the process of putting feelings into words, which influences emotional intensity, duration, and regulation[30]. However, the psychological impact of the framing differs.
+
+## 2. Impact on perceived label correctness
+
+Research on emotion annotation highlights that a single, definitive label often overlooks the multiplicity of emotions present in an utterance, leading to “emotion shift” and “confusing labels”[7]. When a chatbot uses an assertive label, users may experience a mismatch if the label does not capture the full affective nuance, increasing the likelihood of perceived mislabeling. Conversely, an interrogative label explicitly acknowledges possible ambiguity, reducing the risk of a “wrong” label being taken as definitive[24].
+
+## 3. Effects on perceived empathy
+
+Perceived empathy in human‑chatbot interaction is strongly tied to how well the system appears to understand the user’s emotional state[31][4]. Studies show that users rate overall conversation quality higher when chatbots appear empathetic, yet they still view chatbots as less empathetic than humans[31]. An assertive label can boost perceived competence if correct, but it may also be interpreted as **cognitive empathy without affective resonance**, especially when the label is inaccurate[25]. Interrogative labeling, by inviting user confirmation, aligns more closely with **cognitive empathy**—the ability to infer mental states—while also signaling a willingness to adjust, which can enhance the user’s sense of being heard and thus improve perceived empathy[17].
+
+## 4. Practical implications for LLM design
+
+1. **Hybrid strategies** – Combining both forms (e.g., “It sounds like you’re frustrated; is that right?”) can balance confidence with openness, mitigating the pitfalls of mislabeling while still conveying empathy.
+2. **Context‑sensitive selection** – In high‑stakes or emotionally charged contexts, interrogative labeling may be preferable to avoid premature assertions. In routine or low‑stakes interactions, assertive labeling can streamline the dialogue and reinforce the chatbot’s perceived expertise.
+3. **Feedback loops** – Incorporating user confirmations from interrogative prompts into the model’s training data helps refine future label predictions, addressing the “first step to the ‘right’ answer” of correctness defined by relatedness, completeness, and truthfulness[32].

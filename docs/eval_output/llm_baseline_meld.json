@@ -1,0 +1,9 @@
+{
+  "model": "claude-opus-5",
+  "n": 2610,
+  "refusals": 0,
+  "gold_n": 2608,
+  "llm_top1": 0.5318251533742331,
+  "total_input_tokens": 1113193,
+  "total_output_tokens": 337359
+}

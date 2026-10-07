@@ -20,7 +20,14 @@ Requirements:
     New Project -> ACM Conference Template -> set "non-acm" / nonacm option in
     document class, then paste in bimodal_report.tex.
 
-The bibliography is inline (thebibliography) so BibTeX is not required.
+The bibliography is BibTeX: docs/bimodal_report.bib with ACM-Reference-Format (ships with
+acmart). Build: pdflatex main; bibtex main; pdflatex main; pdflatex main. On Overleaf,
+upload bimodal_report.bib next to main.tex and it compiles automatically.
+
+New evaluation fragments \input by main.tex (regenerate with the scripts named):
+  eval_output/alpha_sweep_ft.tex, alpha_sweep.tex   python scripts/alpha_sweep.py --vision finetuned|baseline
+  eval_output/meld_text_table.tex                   python scripts/eval_meld.py
+  (optional) scripts/llm_baseline.py needs ANTHROPIC_API_KEY.
 
 Image dependencies (per-class qualitative table):
   Table tab:qualimages uses real FER2013 thumbnails saved by
@@ -33,4 +40,17 @@ Image dependencies (per-class qualitative table):
   so the folder can sit either at docs/eval_output/qual_images/ (local layout)
   or directly at qual_images/ (typical Overleaf root layout).
 
+Likert table (bimodal_report.tex, tab:likert_by_class):
+  The file docs/eval_output/likert_by_fused_label_table.tex is \input from the
+  report. Regenerate it (and the CSV) with:
+    python scripts/generate_likert_synthetic_table.py
+  from the repository root.
+
 Before submission, replace the placeholder author block and email in the .tex file.
+
+
+LBW draft: docs/lbw.tex (CHI 2027 Late-Breaking Work, ~6 pages). Same fragments/bib.
+  tectonic -X compile lbw.tex
+Small tables are placed before any full-page table* in source, and the Likert placeholder
+uses \captionof inside center, because acmart+XeTeX silently drops single-column floats
+queued behind a table* page.

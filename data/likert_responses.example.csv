@@ -1,0 +1,2 @@
+ts_iso_utc,participant_id,empathy_1_5,social_presence_1_5,congruency_1_5,alpha,vision_branch,dissonant,text_argmax,face_argmax,fused_label,e2e_ms,utterance_excerpt,response_excerpt
+2026-04-27T00:00:00+00:00,example_p1,4,3,4,0.5,baseline (AffectNet),0,Happy,Happy,Happy,1200.0,"I'm doing okay.","I hear you…"

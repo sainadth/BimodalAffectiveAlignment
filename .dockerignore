@@ -1,0 +1,13 @@
+.git
+.venv
+web/node_modules
+web/dist
+data/meld
+data/*.csv
+data/participants.json
+docs
+Screenshots.zip
+*.pptx
+*.pdf
+*.zip
+checkpoints/*.pth

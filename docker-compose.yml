@@ -1,0 +1,27 @@
+# HTTPS is mandatory (browsers only expose the camera on https or localhost).
+# Caddy terminates TLS with an automatic Let's Encrypt certificate for $STUDY_DOMAIN.
+services:
+  study:
+    build: .
+    env_file: .env            # GROQ_API_KEY, LLM_PROVIDER=groq, HF_TOKEN
+    environment:
+      - PARTICIPANTS_JSON=/app/data/participants.json
+      - STUDY_CSV=/app/data/study_responses.csv
+      - STUDY_GLOBAL_CSV=/app/data/study_pets_global.csv
+    volumes:
+      - ./data:/app/data
+      - models:/models
+    restart: unless-stopped
+  caddy:
+    image: caddy:2
+    ports: ["80:80", "443:443"]
+    environment:
+      - STUDY_DOMAIN=${STUDY_DOMAIN:?set STUDY_DOMAIN in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [study]
+    restart: unless-stopped
+volumes:
+  models: {}
+  caddy_data: {}

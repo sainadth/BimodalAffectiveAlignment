@@ -61,9 +61,13 @@ def goemotion_name_to_fer7(go_label: str) -> str:
     return GOEMOTION_TO_FER7[key]
 
 
+COLLAPSE_METHODS = ("sum", "max", "mean")
+
+
 def collapse_goemotions_to_fer7(
     label_scores: np.ndarray,
     goemotion_id2label: dict[int, str],
+    method: str = "sum",
 ) -> np.ndarray:
     """
     Aggregate multilabel GoEmotion scores (length 28) into FER7 (length 7).
@@ -71,17 +75,21 @@ def collapse_goemotions_to_fer7(
     Args:
         label_scores: shape (28,) or (n_labels,); higher = more present (e.g. sigmoid probs).
         goemotion_id2label: id -> label name from the HF model config.
+        method: "sum" (original; 13 labels feed Happy vs 1 Neutral, so Neutral is
+            structurally starved on conversational text), "max" (bin = max member
+            score) or "mean" (bin = sum / bin size). Output is renormalised to sum to 1.
     """
+    if method not in COLLAPSE_METHODS:
+        raise ValueError(f"method must be one of {COLLAPSE_METHODS}, got {method!r}")
     s = np.asarray(label_scores, dtype=np.float64).ravel()
     n = s.size
     if n != len(goemotion_id2label):
-        # Some checkpoints use 28 + neutral etc.; trim or pad
         m = min(n, len(goemotion_id2label))
         t = np.zeros(len(goemotion_id2label), dtype=np.float64)
         t[:m] = s[:m]
         s = t
-
     out = np.zeros(7, dtype=np.float64)
+    counts = np.zeros(7, dtype=np.float64)
     for i, score in enumerate(s):
         name = goemotion_id2label.get(i)
         if name is None:
@@ -89,9 +97,12 @@ def collapse_goemotions_to_fer7(
         key = str(name).strip().lower()
         if key not in GOEMOTION_TO_FER7:
             continue
-        fer = GOEMOTION_TO_FER7[key]
-        out[_fer7_index(fer)] += float(max(score, 0.0))
-
+        j = _fer7_index(GOEMOTION_TO_FER7[key])
+        v = float(max(score, 0.0))
+        counts[j] += 1
+        out[j] = max(out[j], v) if method == "max" else out[j] + v
+    if method == "mean":
+        out = np.where(counts > 0, out / np.maximum(counts, 1), 0.0)
     total = out.sum()
     if total > 0:
         out = out / total

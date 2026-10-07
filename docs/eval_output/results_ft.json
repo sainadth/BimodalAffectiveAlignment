@@ -1,5 +1,5 @@
 {
-  "limit_per_task": 5000,
+  "limit_per_task": 6000,
   "alpha_bimodal": 0.5,
   "results": [
     {

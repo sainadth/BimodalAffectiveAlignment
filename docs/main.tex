@@ -6,6 +6,7 @@
   \usepackage{balance}
   \usepackage{microtype}
   \usepackage{graphicx}
+  \usepackage{xurl}
   % Self-contained for Overleaf: all generated evaluation values are inlined below.
   % Per-class qualitative thumbnails live under eval_output/qual_images/ ; upload
   % that folder to Overleaf alongside this file to render Table~\ref{tab:qualimages}.
@@ -27,15 +28,6 @@
     \state{TX}
     \postcode{78412}
     \country{USA}}
-  \author{Vishakan Umapathy}
-  \email{vumapathy@islander.tamucc.edu}
-  \affiliation{%
-    \department{College of Engineering and Computer Science}
-    \institution{Texas A\&M University--Corpus Christi}
-    \city{Corpus Christi}
-    \state{TX}
-    \postcode{78412}
-    \country{USA}}
   \author{Minhua Huang}
   \authornote{Course instructor and project advisor.}
   \email{minhua.huang@tamucc.edu}
@@ -46,23 +38,24 @@
     \state{TX}
     \postcode{78412}
     \country{USA}}
-  \renewcommand{\shortauthors}{Pagadala, Umapathy, and Huang}
+
+  \renewcommand{\shortauthors}{Pagadala and Huang}
 
   % CCS 2012
-  \begin{CCSXML}
-  <ccs2012>
-  <concept>
-    <concept_id>10003120.10003121</concept_id>
-    <concept_desc>Human-centered computing~Human computer interaction (HCI)</concept_desc>
-    <concept_significance>500</concept_significance>
-  </concept>
-  <concept>
-    <concept_id>10010147.10010257.10010293.10010294</concept_id>
-    <concept_desc>Computing methodologies~Neural networks</concept_desc>
-    <concept_significance>300</concept_significance>
-  </concept>
-  </ccs2012>
-  \end{CCSXML}
+\begin{CCSXML}
+<ccs2012>
+<concept>
+  <concept_id>10003120.10003121</concept_id>
+  <concept_desc>Human-centered computing~Human computer interaction (HCI)</concept_desc>
+  <concept_significance>500</concept_significance>
+</concept>
+<concept>
+  <concept_id>10010147.10010257.10010293.10010294</concept_id>
+  <concept_desc>Computing methodologies~Neural networks</concept_desc>
+  <concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
   \ccsdesc[500]{Human-centered computing~Human computer interaction (HCI)}
   \ccsdesc[300]{Computing methodologies~Neural networks}
 
@@ -72,7 +65,7 @@
   \begin{abstract}
   Conversational systems that read only one channel of human affect often misread the situation: text can hide what a person is feeling, and a face can contradict the words. This work builds and evaluates a bimodal pipeline that listens to both at once. A RoBERTa text classifier (fine-tuned on GoEmotions) and a ResNet-50 face classifier (FER2013-aligned) each emit a seven-way affect distribution, and a single trust weight $\alpha\in[0,1]$ fuses them via
   $b^*=\arg\max_k\bigl(\alpha P_\text{text}(k)+(1\!-\!\alpha)P_\text{face}(k)\bigr)$.
-  The fused class together with the user's utterance feeds FLAN--T5, which produces a short empathetic reply. A Streamlit interface exposes both probability vectors, the fused decision, an explicit affective-dissonance flag, and per-stage timings, so a reviewer can see -- not just trust -- how the system is reasoning. We report unimodal and fused accuracy on the full GoEmotions and FER2013 test splits, a FER2013 fine-tune that lifts visual top-1 from 23.1\% to 68.5\%, real-image and synthetic dissonance evaluations, and a latency breakdown. Affect inference takes about 38\,ms on Apple MPS -- well inside the 400\,ms Doherty threshold -- while end-to-end response generation with FLAN--T5 (base) lands at 942\,ms.
+  The fused class together with the user's utterance feeds FLAN--T5, which produces a short empathetic reply. A Streamlit interface exposes both probability vectors, the fused decision, an explicit affective-dissonance flag, and per-stage timings, so a reviewer can see -- not just trust -- how the system is reasoning. We report unimodal and fused accuracy on the full GoEmotions and FER2013 test splits, a FER2013 fine-tune that lifts visual top-1 from 23.1\% to 68.5\%, real-image and synthetic dissonance evaluations, and a latency breakdown. Affect inference takes about 40\,ms on Apple MPS -- well inside the 400\,ms Doherty threshold -- while end-to-end response generation with FLAN--T5 (base) lands at 955\,ms.
   \end{abstract}
 
   \maketitle
@@ -82,10 +75,18 @@
   When a dialogue system has to infer affect from text alone it is easy to fool: a sarcastic remark looks happy on the surface, a polite ``I'm fine'' hides distress, and a deadpan one-liner gives almost no signal at all. Vision alone has the symmetric weakness -- the same neutral face appears in good lighting, bad lighting, off-axis, or partly occluded. In either case the system has to guess, and a wrong guess in the empathy loop erodes user trust quickly~\cite{card1983human}. Reading both channels at once, when they are available, gives the model a second opinion and -- equally important -- a way to flag the cases where the two opinions disagree.
 
   \subsection{Related work}
-  Facial expression recognition and text-based emotion classification are each mature on their own. What is comparatively rare at course scale is a tight \emph{coupling} of the two in a shared seven-class label space with an exposed trust weight. We borrow the GoEmotions corpus of Demszky et~al.~\cite{demeszky2020goemotions} for text, the FER2013-style ResNet recipe of Goodfellow et~al.~\cite{goodfellow2013challenges} for vision, and the instruction-tuned T5 family of Chung et~al.~\cite{chung2022scaling} for the empathetic response. Latency expectations are framed against the 400\,ms Doherty interaction threshold from Card, Newell, and Moran~\cite{card1983human}.
+  \paragraph{Multimodal emotion recognition.} Fusing language with facial or vocal cues is a long-standing line of work in affective computing~\cite{picard1997affective,baltrusaitis2019multimodal}. Natural multimodal corpora such as IEMOCAP~\cite{busso2008iemocap}, CMU-MOSEI~\cite{zadeh2018mosei}, and MELD~\cite{poria2019meld} established the benchmark setting; fusion strategies range from the late, decision-level blend we use to tensor fusion~\cite{zadeh2017tensor} and cross-modal attention~\cite{tsai2019mult}. Recent surveys map how multimodal large language models are absorbing this pipeline end to end~\cite{zhang2026mer_llm_survey}. Our contribution is deliberately not a new fusion architecture: we keep a one-parameter convex blend so that the trust weight $\alpha$ stays legible to a user, and we ask what that legibility buys in perceived empathy.
+
+  \paragraph{Verbal--visual incongruence.} The specific case we care about -- words that say one thing while the face says another -- has only recently received dedicated data. E-THER~\cite{tahir2025ether} annotates verbal--visual incongruence in person-centred-therapy sessions and argues that mismatch awareness is a prerequisite for empathic AI. Our dissonance flag (Section~\ref{sec:dissonance}) is a lightweight operationalisation of the same idea on top of off-the-shelf sensors.
+
+  \paragraph{Empathetic response generation.} EmpatheticDialogues~\cite{rashkin2019empathetic} made emotion-grounded response generation a standard task; MoEL~\cite{lin2019moel}, MIME~\cite{majumder2020mime}, and CEM~\cite{sabour2022cem} condition a generator on a recognised or mimicked emotion, and Emotional Chatting Machine~\cite{zhou2018ecm} does so with explicit emotion memory. Sharma et~al.~\cite{sharma2020epitome} decompose expressed empathy into interpretable mechanisms. Multimodal variants have appeared for speech~\cite{wang2024blspemo} and for multi-agent multimodal pipelines~\cite{wang2026multiagent_merg}. We follow the emotion-conditioned template of this literature but supply the label from a bimodal, user-inspectable sensor rather than from text alone.
+
+  \paragraph{Measuring perceived empathy and presence.} Empathy is a contested construct even in humans~\cite{cuff2016empathy}; for systems, the Perceived Empathy of Technology Scale (PETS)~\cite{schmidmaier2024pets} offers a validated ten-item instrument with Emotional-Responsiveness and Understanding-and-Trust subscales, which our study protocol adopts in place of ad-hoc items. Social presence follows Short et~al.~\cite{short1976social} and Biocca et~al.~\cite{biocca2003social}. Latency expectations are framed against the 400\,ms response-time threshold~\cite{doherty1982economic,card1983human}. For inference we report paired McNemar tests~\cite{mcnemar1947note} and Wilson intervals~\cite{wilson1927probable}; ordinal ratings will be analysed with rank-based methods~\cite{wobbrock2011art}.
+
+  \paragraph{Caveats on reading emotion from faces.} Barrett et~al.~\cite{barrett2019emotional} show that facial configurations map to emotion categories far less reliably than the basic-emotion view~\cite{ekman1971universals} assumes (a dimensional valence--arousal account~\cite{russell1980circumplex} fits the data better), and that context dominates. We therefore treat $P_\text{face}$ as one noisy opinion that a user can down-weight with $\alpha$, not as ground truth, and we evaluate the system on how it makes people feel rather than on face-label accuracy alone.
 
   \subsection{Approach and contributions}
-  The pipeline mirrors the course architecture (Fig.~\ref{fig:pipeline}). A transformer text sensor (RoBERTa fine-tuned on GoEmotions~\cite{demeszky2020goemotions}) emits $P_\text{text}$ over the seven FER classes; a ResNet-50 face sensor~\cite{goodfellow2013challenges} emits $P_\text{face}$ over the same seven classes; a late fusion (Eq.~\ref{eq:main}) blends them with a trust weight~$\alpha$; and a FLAN--T5 generator~\cite{chung2022scaling} turns the fused class into a short empathetic reply. We make five concrete contributions: (1) a deterministic surjection from the 28 GoEmotions labels into the 7 FER classes; (2) an end-to-end Streamlit demo that exposes every intermediate signal so a reviewer can probe the system rather than just consume its output; (3) a separate FER2013 fine-tuning workflow that takes the face branch from a near-chance 23.1\% to 68.5\% top-1 without altering the deployed code path; (4) scripted ablation, $\alpha$-sensitivity, dissonance, and latency benchmarks tied to the same shared evaluation harness; and (5) an honest discussion of the places each component still breaks.
+  The pipeline mirrors the course architecture (Fig.~\ref{fig:pipeline}). A transformer text sensor (RoBERTa~\cite{liu2019roberta} fine-tuned on GoEmotions~\cite{demszky2020goemotions}) emits $P_\text{text}$ over the seven FER classes; a ResNet-50~\cite{he2016resnet} face sensor pre-trained on AffectNet~\cite{mollahosseini2019affectnet} and evaluated on FER2013~\cite{goodfellow2013challenges} emits $P_\text{face}$ over the same seven classes; a late fusion (Eq.~\ref{eq:main}) blends them with a trust weight~$\alpha$; and a FLAN--T5 generator~\cite{chung2024scaling} turns the fused class into a short empathetic reply. We make five concrete contributions: (1) a deterministic surjection from the 28 GoEmotions labels into the 7 FER classes; (2) an end-to-end Streamlit demo that exposes every intermediate signal so a reviewer can probe the system rather than just consume its output; (3) a separate FER2013 fine-tuning workflow that takes the face branch from a near-chance 23.1\% to 68.5\% top-1 without altering the deployed code path; (4) scripted ablation, $\alpha$-sensitivity, dissonance, and latency benchmarks tied to the same shared evaluation harness; (5) a full $\alpha$ sweep with paired McNemar tests and a check of the text branch on natural MELD utterances, which exposes how far the template benchmark is from deployment; and (6) a within-subjects $3\times2$ study protocol and participant app -- label correctness (correct / wrong / none) crossed with conversational move (assert / ask), self-reported felt emotion as ground truth, a per-trial manipulation check, and a pre-specified analysis -- for measuring what a wrong affect read costs relative to what a right one gains.
 
   \begin{figure*}[t]
   \centering
@@ -117,10 +118,10 @@
   GoEmotions ships with 28 fine-grained emotion strings, while the visual branch can only resolve seven. We collapse the 28 to the 7 with a hand-coded surjection that lives in the codebase as a single Python dictionary: every GoEmotions string maps to exactly one of \{\,Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral\,\}. Because GoEmotions is multilabel and uses sigmoid scores, we \emph{sum} the sigmoid mass landing in each FER-7 bin and renormalize to a proper distribution; this keeps the relative confidence of fine-grained labels (e.g., \emph{annoyance} adding to \emph{anger}) when several map to the same bin.
 
   \subsection{Language model}
-  The text sensor is the public RoBERTa-base GoEmotions checkpoint \texttt{SamLowe/roberta-base-go\_emotions} on HuggingFace, which corresponds to the assignment's ``BERT/RoBERTa on GoEmotions'' requirement and lets us avoid retraining a 28-way head from scratch.
+  The text sensor is the public RoBERTa-base GoEmotions checkpoint \path{SamLowe/roberta-base-go_emotions} on HuggingFace, which corresponds to the assignment's ``BERT/RoBERTa on GoEmotions'' requirement and lets us avoid retraining a 28-way head from scratch.
 
   \subsection{Visual model and preprocessing}
-  The face branch is a 7-way ResNet-50 head that consumes a $224\!\times\!224$ RGB input with FER/AffectNet-style mean normalization. The deployed app loads \texttt{ElenaRyumina/face\_emotion\_recognition} as the baseline checkpoint, which is convenient because it is publicly available and works out of the box on near-frontal RGB faces. It is also where most of our visual-branch error budget lives, because FER2013 test images are 48$\!\times\!48$ grayscale faces upscaled to 224$\!\times\!224$ -- a noticeable domain shift away from the AffectNet distribution this checkpoint was trained on. To quantify and partially close that gap we also fine-tune the same head on the \texttt{AutumnQiu/fer2013} train split (Table~\ref{tab:finetune}). The fine-tuned weights are evaluated independently of the deployed path so the baseline numbers in this report stay reproducible.
+  The face branch is a 7-way ResNet-50 head that consumes a $224\!\times\!224$ RGB input with FER/AffectNet-style mean normalization. The deployed app loads \path{ElenaRyumina/face_emotion_recognition} as the baseline checkpoint, which is convenient because it is publicly available and works out of the box on near-frontal RGB faces. It is also where most of our visual-branch error budget lives, because FER2013 test images are 48$\!\times\!48$ grayscale faces upscaled to 224$\!\times\!224$ -- a noticeable domain shift away from the AffectNet distribution this checkpoint was trained on. To quantify and partially close that gap we also fine-tune the same head on the \path{AutumnQiu/fer2013} train split (Table~\ref{tab:finetune}). The fine-tuned weights are evaluated independently of the deployed path so the baseline numbers in this report stay reproducible.
 
   \subsection{Empathetic response generation}
   Once the fused class $b^{*}$ is decided, the user utterance $U$ and a verbalized form of $b^{*}$ are passed to FLAN--T5 (base, 220M parameters) under a deterministic instruction prompt (full prompt in Section~\ref{sec:gen-samples}). Only $U$ and the FER-7 class string flow into the prompt, following the assignment specification; the probability vectors themselves are not exposed to the language model.
@@ -140,7 +141,7 @@
   \begin{table*}[t]
     \centering
     \small
-    \caption{Top-1 FER$7$ accuracy (run: $n$ limited to 5000 per sub-task; the available test sets have 4590 GoEmotions single-label and 3589 FER2013 examples; $\alpha\!=\!0.5$ for fusion). \emph{Text:} GoEmotions test, single\nobreakdash label (mapped to FER$7$). \emph{Image:} \texttt{AutumnQiu/fer2013}. \emph{Bimodal:} one emotion\nobreakdash matched template per FER class; fusion per Eq.~\ref{eq:main}. Lower two rows: text-only and image-only \emph{branches} on the same bimodal pairs (ablation).}
+    \caption{Top-1 FER$7$ accuracy (full test sets: 4590 GoEmotions single-label and 3589 FER2013 examples; $\alpha\!=\!0.5$ for fusion). \emph{Text:} GoEmotions test, single-label (mapped to FER$7$). \emph{Image:} \texttt{AutumnQiu/fer2013}. \emph{Bimodal:} one emotion-matched template per FER class; fusion per Eq.~\ref{eq:main}. Lower two rows: text-only and image-only \emph{branches} on the same bimodal pairs (ablation).}
     \label{tab:results}
     \begin{tabular}{@{}lcc@{}}
       \toprule
@@ -156,8 +157,18 @@
     \end{tabular}
   \end{table*}
 
+  \subsection{Natural utterances: MELD}\label{sec:meld}
+  The congruent benchmark hands the text branch one of seven template sentences chosen by the gold label, so its 82.6\% is an upper bound, not a measurement. To see the text branch on real speech we run it on the MELD test split~\cite{poria2019meld}: 2,610 utterances from \emph{Friends}, whose seven emotion labels map one-to-one onto FER-7 (\path{scripts/eval_meld.py}). Table~\ref{tab:meld_text} reports the result: 43.0\% top-1 (Wilson 95\% CI 41.1--44.9), macro-F1 0.278, which is \emph{below} the 48.1\% majority-class (Neutral) floor. The confusion matrix shows why: 1,256 gold-Neutral lines are spread across Neutral (627), Happy (289), and Surprise (242), because GoEmotions' Reddit register reads everyday conversational neutrality as mildly positive or surprised, and the 28-to-7 surjection sends several of those labels to Happy and Surprise. This is the single most important number in the paper for calibrating the rest: an affect sensor that looks strong on templates is weak on spontaneous dialogue, which is exactly the regime the study in Section~\ref{sec:study} probes. For scale, the same table includes two LLM-only comparators given each utterance alone and asked for a FER-7 label via a constrained JSON schema (\path{scripts/llm_baseline.py}, no fine-tuning, no face): Claude Opus 5 reaches 53.2\% top-1 / macro-F1 0.455 (about \$14 for the split) and the open-weight \texttt{gpt-oss-120b} served by Groq reaches 54.1\% / 0.410 (about \$0.50). Both sit above the floor and ten points above our RoBERTa-GoEmotions branch. A general-purpose language model is therefore a stronger affect sensor than the dedicated classifier we deploy, which is a second reason the contribution has to be the interaction, not the recogniser. The face side is worse still. Running the same script with \path{--video-dir} on the MELD test videos, face-cropping the middle frame of each clip with OpenCV's YuNet detector (a face is found in 99.0\% of clips, $n\!=\!2583$), gives Table~\ref{tab:meld_bimodal}. The baseline AffectNet face branch scores 15.3\% top-1 (macro-F1 0.065) and the FER2013 fine-tuned branch 22.8\% (0.144) -- both far below the text branch and below the Neutral floor -- and fusing either with text at $\alpha\!=\!0.5$ \emph{lowers} accuracy relative to text alone (40.4\% and 37.7\% vs.\ 42.9\%). Sweeping $\alpha$ recovers text-only performance only as $\alpha\!\to\!0.7$--$1.0$. Two things follow. The FER2013 fine-tune, which lifted the congruent benchmark from 81.6\% to 87.8\%, does not transfer to sitcom frames: posed, frontal, grey-scale training faces are a poor proxy for a speaking actor mid-utterance, and a single middle frame ignores the temporal signal that MELD models normally exploit~\cite{poria2019meld}. And on natural data the convex blend has no $\alpha$ at which the face branch helps, so any benefit of showing users a face-aware system must come from how it \emph{feels}, not from what it \emph{recognises} -- which is exactly the question Section~\ref{sec:study} is designed to answer.
+
+  \input{eval_output/meld_text_table}
+  \input{eval_output/meld_bimodal_table}
+  \input{eval_output/collapse_ablation}
+
+  Part of the text deficit is structural rather than a property of the classifier. The 28-to-7 surjection sums sigmoid mass per bin, and thirteen GoEmotions labels feed Happy against one for Neutral, so Neutral is starved on conversational text. Table~\ref{tab:collapse_ablation} holds the RoBERTa outputs fixed and varies only the aggregation (\path{scripts/collapse_ablation.py}): taking the per-bin maximum changes little (43.7\%), normalising each bin by its size lifts top-1 to 50.9\%, above the floor, and a seven-way logistic regression on the 28 sigmoids fitted on the MELD \emph{training} split reaches 55.6\% top-1 (macro-F1 0.292), a point above both zero-shot LLMs; its class-balanced variant trades top-1 for the best macro-F1 in the table (0.318). The deployed sensor keeps the original sum so that every other number in this report stays comparable (\texttt{COLLAPSE\_METHOD} selects the alternatives), but the ablation shows that a few minutes of in-domain calibration closes most of the gap to the LLMs on this benchmark -- and, equally, that none of these variants make the face branch useful.
+
+
   \subsection{Fine-tuning the visual branch}
-  The default visual checkpoint is fine for a live demo, but it is clearly the weakest part of the pipeline on FER2013 test data: an AffectNet-trained model asked to score 48$\!\times\!48$ grayscale frames is operating well outside its training distribution. We therefore fine-tuned the same ResNet-50 head on the \texttt{AutumnQiu/fer2013} train split with a held-out validation slice and standard cross-entropy. Table~\ref{tab:finetune} shows the result: full-test top-1 accuracy moves from 23.1\% to 68.5\%, almost a three-fold improvement and roughly the difference between near-chance and a usable face signal. We deliberately keep the fine-tuned weights as a separate checkpoint from the deployed demo so that every baseline number in this report stays reproducible without any extra setup; \texttt{scripts/eval\_fer\_checkpoint.py} loads the new file directly when the reader wants to verify the fine-tuned numbers.
+  The default visual checkpoint is fine for a live demo, but it is clearly the weakest part of the pipeline on FER2013 test data: an AffectNet-trained model asked to score 48$\!\times\!48$ grayscale frames is operating well outside its training distribution. We therefore fine-tuned the same ResNet-50 head on the \path{AutumnQiu/fer2013} train split with a held-out validation slice and standard cross-entropy. Table~\ref{tab:finetune} shows the result: full-test top-1 accuracy moves from 23.1\% to 68.5\%, almost a three-fold improvement and roughly the difference between near-chance and a usable face signal. We deliberately keep the fine-tuned weights as a separate checkpoint from the deployed demo so that every baseline number in this report stays reproducible without any extra setup; \path{scripts/eval_fer_checkpoint.py} loads the new file directly when the reader wants to verify the fine-tuned numbers.
 
   \begin{table}[t]
     \centering
@@ -174,7 +185,7 @@
     \end{tabular}
   \end{table}
 
-  \subsection{Dissonance and trust weight}
+  \subsection{Dissonance and trust weight}\label{sec:dissonance}
   ``Dissonance'' here is the case in which the text and the face disagree about what the user feels. We probe it two complementary ways. The real-image probe pairs every FER2013 test image with a deliberately mismatched template sentence and treats the FER2013 label as the intended affect; the fused decision should ideally recover that intended label, but the baseline face branch is only 23.1\% accurate on FER2013, so most of the time the system follows the misleading text rather than the noisy face. The synthetic probe replaces the face branch with a one-hot vector for the intended class, which isolates the fusion arithmetic from any face-classifier noise: when one of the two inputs is perfect, $\alpha\!=\!0.5$ should -- and does -- recover the intended class even though the other input is wrong by construction. Table~\ref{tab:dissonance} lists both. We treat the real-image row as the honest result and the synthetic row as a sanity check on the fusion rule itself.
 
   \begin{table*}[t]
@@ -193,6 +204,29 @@
   \end{table*}
 
   Table~\ref{tab:qualdissimages} drills into the real-image dissonant setting with the first 10 FER2013 test images -- the same indices that contribute to the aggregate row above. The mismatched-text class~$j$ is fixed by the row index via $j = (y + 1 + (k\bmod 6)) \bmod 7$, so every row has a different gold/text pairing and we are not cherry-picking. Three patterns jump out. The text branch follows the planted misdirection on all 10 rows, which is consistent with the $\sim$4\% aggregate $\alpha\!=\!1$ accuracy. The face branch -- still the baseline AffectNet checkpoint here -- collapses to \emph{Happy} on 7 of 10 rows, which is the visual-branch domain shift we describe in Section~\ref{sec:failmodes}. And the fused decision essentially tracks the text branch because the gold-versus-mismatch distinctions (Angry vs.\ Disgust, Sad vs.\ Surprise, etc.) are well below the resolution of a 23\%-accurate face signal. We revisit the same 10 rows with the fine-tuned face branch in Section~\ref{sec:finetuned}; the two tables share image indices so the reader can flip between them and compare the two visual backbones row by row.
+
+  % Small floats placed here (before the full-page table*) so they are not held behind it.
+  \input{eval_output/alpha_sweep_ft}
+  \input{eval_output/alpha_sweep}
+
+  \begin{table}[t]
+    \centering
+    \caption{Latency benchmark on Apple MPS (15 timed runs after 3 warm-up runs). FLAN--T5 base, beam search (4 beams), $\geq$18 / $\leq$128 new tokens.}
+    \label{tab:latency}
+    \small
+    \begin{tabular}{@{}lcc@{}}
+      \toprule
+      \textbf{Stage} & \textbf{Mean (ms)} & \textbf{Std. dev. (ms)} \\
+      \midrule
+      Text model            &  20.6 &  4.5 \\
+      Face model            &  19.8 &  4.5 \\
+      Fusion                &   0.1 &  0.0 \\
+      Affect subtotal       &  40.5 &  --  \\
+      FLAN--T5 (base) gen.  & 914.4 & 24.5 \\
+      End-to-end            & 954.9 & 23.6 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
 
 \begin{table*}[t]
   \small
@@ -220,29 +254,20 @@
 \end{table*}
 
   \subsection{Trust-weight $\alpha$ sensitivity}
-  Eq.~\ref{eq:main} is a one-parameter family of decision rules, and three points along it are operationally meaningful: $\alpha\!=\!1$ (text only), $\alpha\!=\!0$ (face only), and the balanced $\alpha\!=\!0.5$. We adopt $\alpha\!=\!0.5$ as the system default for two reasons. First, on the matched bimodal benchmark in Table~\ref{tab:results} the fused decision scores 81.6\% top-1, only one point below the 82.6\% text branch on the same pairs -- a small price for a face-aware decision rule. Second, the dissonant evaluations in Table~\ref{tab:dissonance} show that $\alpha\!=\!0.5$ inherits whichever branch is the more confident: with a one-hot synthetic face vector it reaches 100\% even when the text input is wrong by construction (3\%), and with the noisy baseline face it stays bounded by the weak face signal (4.3\% vs.\ 23.1\%). Put another way, $\alpha$ is meant to be an interpretable HCI knob, not a hyperparameter to tune on a held-out set, so we expose it on the Streamlit sidebar instead of optimizing it away. A reviewer who wants to probe the same input under different trust regimes can simply slide $\alpha$ and watch the dissonance badge.
+  Eq.~\ref{eq:main} is a one-parameter family of decision rules. Tables~\ref{tab:alpha_sweep_ft} and~\ref{tab:alpha_sweep} sweep $\alpha$ from 0 to 1 in steps of 0.05 on the full FER2013 congruent benchmark ($n\!=\!3589$; \path{scripts/alpha_sweep.py}). With the fine-tuned face branch the curve rises monotonically from 68.5\% (face only) to a sharp maximum of 87.8\% at $\alpha\!=\!0.5$ and then falls to the text plateau of 82.6\% for every $\alpha\!\geq\!0.6$. The fused decision at $\alpha\!=\!0.5$ beats the text branch on the same pairs by a paired McNemar test ($b\!=\!299$ pairs fused-right/text-wrong vs.\ $c\!=\!111$, $\chi^2\!=\!85.3$, $p\!<\!10^{-19}$). That gain has a single source: the Neutral template (``\emph{I feel pretty neutral}'') is read as Happy by the text branch, so all 626 Neutral images are text-wrong, and the fine-tuned face branch rescues 299 of them; the other six classes contribute no net gain. Because the text branch sees only seven distinct inputs, its effective sample size is seven, and the McNemar $p$-value should be read as a statement about those seven sentences, not about language in general. With the baseline face branch the picture inverts: face only is 23.1\%, and any $\alpha\!\geq\!0.6$ simply reproduces the text branch, so $\alpha\!=\!0.5$ (81.6\%) is marginally \emph{worse} than text alone ($c\!=\!35$ pairs lost, $b\!=\!0$ gained, $p\!<\!10^{-8}$). Two honest readings follow. First, the fine-tune is what makes the face branch worth listening to at all. Second, the plateau above $\alpha\!=\!0.6$ is an artefact of the benchmark: there are only seven template sentences, so $P_\text{text}$ takes only seven values and dominates the argmax as soon as it is weighted above the face vector; the sharpness of the 0.5 peak should not be read as a tuned optimum. We keep $\alpha\!=\!0.5$ as the default and expose it on the Streamlit sidebar because $\alpha$ is meant as an interpretable trust knob, not a hyperparameter.
+
 
   \subsection{Latency and HCI review}
-  The deployed app reports per-stage timings, and we replicate them in a scripted benchmark on Apple MPS using 3 warm-up runs followed by 15 timed runs over a fixed utterance and synthetic face frame. The affect subtotal -- text plus face plus the fusion arithmetic -- finishes in roughly 38\,ms, well under the 400\,ms Doherty threshold from the HCI literature, so a user holding a slider on $\alpha$ sees the bar charts update with no perceptible lag. End-to-end latency including FLAN--T5 (base) generation rises to 942\,ms (Table~\ref{tab:latency}); generation dominates because we use deterministic beam search with $n_\text{beams}\!=\!4$ on a 220M-parameter model running on a laptop GPU. In a deployed product, the response would be streamed token-by-token so that the user perceives a sub-400\,ms onset even though the full message lands later. We do not claim a formal participant Likert study; instead, we offer per-class qualitative cases on real FER2013 images (Table~\ref{tab:qualimages}), the actual FLAN--T5 replies that go with them (Table~\ref{tab:qualresponses}), expert-review dissonant examples in the course handout format (Table~\ref{tab:qual}), and a ready-to-run Likert template at \texttt{docs/HCI\_STUDY\_TEMPLATE.md} for future participants.
+  The deployed app reports per-stage timings, and we replicate them in a scripted benchmark on Apple MPS using 3 warm-up runs followed by 15 timed runs over a fixed utterance and synthetic face frame (\path{scripts/benchmark_latency.py}; raw log in \path{docs/eval_output/latency.txt}). The affect subtotal -- text plus face plus the fusion arithmetic -- finishes in roughly 40\,ms, well under the 400\,ms response-time threshold~\cite{doherty1982economic}, so a user holding a slider on $\alpha$ sees the bar charts update with no perceptible lag. End-to-end latency including FLAN--T5 (base) generation rises to 955\,ms (Table~\ref{tab:latency}); generation dominates because we use deterministic beam search with $n_\text{beams}\!=\!4$ on a 220M-parameter model running on a laptop GPU. In a deployed product the response would be streamed token-by-token so that the user perceives a sub-400\,ms onset even though the full message lands later. The human-subjects evaluation is specified in Section~\ref{sec:study}; the qualitative material that follows -- per-class cases on real FER2013 images (Table~\ref{tab:qualimages}), the FLAN--T5 replies that go with them (Table~\ref{tab:qualresponses}), and handout-style dissonant examples (Table~\ref{tab:qual}) -- is author-curated and should be read as illustration, not evidence.
 
-  \begin{table}[t]
-    \centering
-    \small
-    \caption{Latency benchmark on Apple MPS (15 timed runs after 3 warm-up runs). FLAN--T5 base, beam search (4 beams), $\geq$18 / $\leq$128 new tokens.}
-    \label{tab:latency}
-    \begin{tabular}{@{}lcc@{}}
-      \toprule
-      \textbf{Stage} & \textbf{Mean (ms)} & \textbf{Std. dev. (ms)} \\
-      \midrule
-      Text model            &  18.9 &  3.1 \\
-      Face model            &  19.4 &  4.0 \\
-      Fusion                &   0.1 &  0.0 \\
-      Affect subtotal       &  38.4 &  --  \\
-      FLAN--T5 (base) gen.  & 903.9 & 69.7 \\
-      End-to-end            & 942.2 & 67.7 \\
-      \bottomrule
-    \end{tabular}
-  \end{table}
+
+  \subsection{Perceived-empathy study: protocol and placeholder table}\label{sec:study}
+  Two prior studies fed an LLM chatbot a facial-emotion label on every turn and found no significant change in perceived empathy (Schmidmaier et~al.\ 2025, $N\!=\!200$; a four-condition $N\!=\!28$ study, 2025), and our benchmarks show that off-the-shelf affect sensors are wrong on natural input more often than they are right. A null average is what one would expect if correct reads help a little and wrong reads hurt a lot. The human-subjects component therefore manipulates \emph{correctness} directly rather than the presence of a face channel. It is a within-subjects $3\!\times\!2$ factorial served by one open-weight language model (\texttt{gpt-oss-120b} via Groq, low reasoning effort, one system prompt): the generator is told either the emotion the participant has just reported (\emph{correct}), a label of opposite valence (\emph{wrong}), or nothing (\emph{none}); and it is instructed either to \emph{assert} how the user seems to feel or to \emph{ask} about it. Each participant completes two blocks of six trials in a Williams Latin-square order keyed by participant number; one trial per block carries a mild affect-elicitation instruction. Before each reply is generated the participant reports the emotion they actually feel, which defines the correct label and serves as ground truth for the sensors, whose outputs are logged for exploratory analysis only. After each reply they rate three items (matched how I felt; warm and understanding; considered my mental state) and answer a manipulation check (``the agent seemed to think I was feeling\ldots''); the full PETS~\cite{schmidmaier2024pets} is administered once, followed by a blinding funnel question and an in-app debrief with data withdrawal. Pre-specified hypotheses: H1 correct $>$ wrong; H2 the penalty of a wrong label exceeds the gain of a correct one; H3 asking softens the penalty (wrong-ask $>$ wrong-assert). Target $n\!=\!42$ (a multiple of the square), powered for medium effects on H1 and H2; analysis (Friedman; Holm-corrected Wilcoxon on six named contrasts; rank-biserial effect sizes with bootstrap CIs; manipulation-check sensitivity analysis) is implemented in \path{scripts/analyze_study.py} and described in \path{docs/STUDY_PROTOCOL.md}. The study will be registered before the first participant; it was not registered at the time of writing. Until it is run, the table below is a \textbf{synthetic placeholder} and must not be read as a result.
+
+  \subsubsection*{Synthetic placeholder (not participant data)}
+  The course handout (Project.pdf \S3.2) asks for 5-point ratings on \emph{Empathy} and \emph{Social presence} and a qualitative take on \emph{affective congruency}. The Streamlit app implements those items as one-through-five sliders; this subsection records a \textbf{script-generated} set of 120 notional five-point items (fixed RNG seed, balanced across the seven possible fused FER-7 labels) so that a reader can see mean and standard deviation by class. The pipeline is \path{scripts/generate_likert_synthetic_table.py}; it writes \path{docs/eval_output/likert_synthetic_study.csv} and the table fragment that follows. \textbf{The scores are for illustration and replication checks only, not a human-subjects result.} Happy-stratum means trend highest on all three items in this run, which matches the intuitive ordering of our generative prior; a real study could confirm or refute that pattern on actual participants or expert judges.
+
+  \input{eval_output/likert_by_fused_label_table}
 
   \subsection{Per-class qualitative cases (real FER2013 images)}
   Table~\ref{tab:qualimages} samples one real FER2013 test image per FER-7 gold class and pairs it with the matching congruent template text. We then read out the predicted FER-7 class at $\alpha\!=\!1$ (text only), $\alpha\!=\!0.5$ (fused), and $\alpha\!=\!0$ (face only) using the baseline ResNet-50. Two patterns stand out. The face branch is unreliable on FER2013: it misclassifies 5 of the 7 images on its own, which is the per-row picture behind the 23.1\% aggregate in Table~\ref{tab:results}. The text branch, on the other hand, pulls the fused decision toward the correct gold class on 6 of 7 cases. The single failure is the Neutral row, where the template text itself contains positive-sounding language (``\texttt{feel pretty neutral}''), and the GoEmotions head reads it as Happy -- the kind of subtle text-side mistake the trust weight $\alpha$ is meant to surface rather than hide.
@@ -274,7 +299,7 @@
   \begin{quote}\small\itshape
   ``You are an empathetic counsellor talking to a user. Reply to the user in 2 short sentences using the word \emph{you} at least once. Acknowledge that they feel \texttt{<descriptor(b*)>}, validate the feeling, then ask one short open question. Do NOT repeat the user's sentence verbatim and do NOT speak in the first person; address the user.\\ User said: \texttt{<U>}\\ Inferred emotion: \texttt{<b*>}.\\ Empathetic reply (begin with ``It sounds like'' or ``I hear''):''
   \end{quote}
-  The prompt verbalizes $b^{*}$ through a fixed seven-entry descriptor table (e.g.\ \texttt{Sad}\,$\to$\,``sad and discouraged'') so that the small base model attends to a richer adjective phrase rather than a bare class label. Decoding is deterministic beam search ($n_\text{beams}\!=\!4$, no-repeat 3-grams, repetition penalty 1.6, between 18 and 128 new tokens, no sampling). Table~\ref{tab:qualresponses} lists the actual reply $R$ for each row of Table~\ref{tab:qualimages}. Five of the seven rows produce a clean second-person acknowledgement plus a reflective follow-up question, which is what the prompt asks for. The Sad row exposes a known habit of FLAN--T5 base, where it slips into a multiple-choice answer format, and the Surprise row paraphrases $U$ instead of asking a real question. We read these as limitations of the 220M backbone, not of the alignment pipeline; swapping in any 1B-class instruction-tuned model is a one-line change in \texttt{response\_synthesizer.py} and would improve generation quality without affecting any of the affect-alignment numbers above.
+  The prompt verbalizes $b^{*}$ through a fixed seven-entry descriptor table (e.g.\ \texttt{Sad}\,$\to$\,``sad and discouraged'') so that the small base model attends to a richer adjective phrase rather than a bare class label. Decoding is deterministic beam search ($n_\text{beams}\!=\!4$, no-repeat 3-grams, repetition penalty 1.6, between 18 and 128 new tokens, no sampling). Table~\ref{tab:qualresponses} lists the actual reply $R$ for each row of Table~\ref{tab:qualimages}. Five of the seven rows produce a clean second-person acknowledgement plus a reflective follow-up question, which is what the prompt asks for. The Sad row exposes a known habit of FLAN--T5 base, where it slips into a multiple-choice answer format, and the Surprise row paraphrases $U$ instead of asking a real question. We read these as limitations of the 220M backbone, not of the alignment pipeline; swapping in any 1B-class instruction-tuned model is a one-line change in \path{response_synthesizer.py} and would improve generation quality without affecting any of the affect-alignment numbers above.
 
   \begin{table*}[t]
     \small
@@ -304,7 +329,7 @@
   \begin{table*}[t]
     \small
     \centering
-    \caption{Expert-review dissonant examples following the course handout format.}
+    \caption{Author-written dissonant examples in the course handout format (illustrative intents, not model output).}
     \label{tab:qual}
     \setlength{\tabcolsep}{4pt}
     \begin{tabular}{@{}p{0.20\textwidth}p{0.12\textwidth}p{0.12\textwidth}p{0.50\textwidth}@{}}
@@ -319,14 +344,14 @@
   \end{table*}
 
   \subsection{Fine-tuned model results}\label{sec:finetuned}
-  Every preceding table in this report uses the \emph{baseline} ResNet-50 face branch -- the public AffectNet-trained \texttt{ElenaRyumina/face\_emotion\_recognition} checkpoint -- so that the main numbers correspond exactly to the deployed default app. This subsection re-runs the same evaluations with the FER2013 fine-tuned face branch swapped in (Table~\ref{tab:finetune}) so the reader can see how each downstream metric changes once the visual branch is corrected for the FER2013 domain shift.
+  Every preceding table in this report uses the \emph{baseline} ResNet-50 face branch -- the public AffectNet-trained \path{ElenaRyumina/face_emotion_recognition} checkpoint -- so that the main numbers correspond exactly to the deployed default app. This subsection re-runs the same evaluations with the FER2013 fine-tuned face branch swapped in (Table~\ref{tab:finetune}) so the reader can see how each downstream metric changes once the visual branch is corrected for the FER2013 domain shift.
 
-  \emph{Bimodal congruent (matched template text + real FER2013 image).} Re-running the unimodal/bimodal benchmark of Table~\ref{tab:results} with the fine-tuned face branch substituted in (\texttt{scripts/run\_evaluation.py --finetune-ckpt}) gives Table~\ref{tab:resultsft}. The text branch is unchanged, as expected. The image branch tracks the FER2013 image-only fine-tune from Table~\ref{tab:finetune} (23.1\,\%~$\to$~68.5\,\%). And the fused $\alpha\!=\!0.5$ score climbs from 81.6\,\% to \textbf{87.8\,\%} -- now clearly above the 82.6\,\% text branch on the same pairs. This is the first regime in which adding the face actually \emph{helps} the fused decision rather than gently dragging it down.
+  \emph{Bimodal congruent (matched template text + real FER2013 image).} Re-running the unimodal/bimodal benchmark of Table~\ref{tab:results} with the fine-tuned face branch substituted in (\path{scripts/run_evaluation.py} \path{--finetune-ckpt}) gives Table~\ref{tab:resultsft}. The text branch is unchanged, as expected. The image branch tracks the FER2013 image-only fine-tune from Table~\ref{tab:finetune} (23.1\,\%~$\to$~68.5\,\%). And the fused $\alpha\!=\!0.5$ score climbs from 81.6\,\% to \textbf{87.8\,\%} -- now clearly above the 82.6\,\% text branch on the same pairs. This is the first regime in which adding the face actually \emph{helps} the fused decision rather than gently dragging it down.
 
   \begin{table*}[t]
     \centering
     \small
-    \caption{Top-1 FER$7$ accuracy with the \textbf{fine-tuned} ResNet-50 face branch substituted in (companion to Table~\ref{tab:results}; same evaluation protocol, $n$ limited to 5000 per sub-task; $\alpha\!=\!0.5$ for fusion).}
+    \caption{Top-1 FER$7$ accuracy with the \textbf{fine-tuned} ResNet-50 face branch substituted in (companion to Table~\ref{tab:results}; same evaluation protocol on the full test sets; $\alpha\!=\!0.5$ for fusion).}
     \label{tab:resultsft}
     \begin{tabular}{@{}lcc@{}}
       \toprule
@@ -342,7 +367,7 @@
     \end{tabular}
   \end{table*}
 
-  \emph{Real-image dissonance, aggregate.} Re-running \texttt{scripts/eval\_dissonant\_fer2013.py --finetune-ckpt} on the full FER2013 test split ($n\!=\!3589$ deliberately mismatched rows) produces the lower row of Table~\ref{tab:dissonanceft}. Text-only stays at 4.0\,\% -- the prompt is wrong on purpose, so this is exactly what we expect -- but the fused $\alpha\!=\!0.5$ accuracy jumps from 4.3\,\% to \textbf{41.8\,\%} and face-only from 23.1\,\% to \textbf{68.5\,\%}. With a face branch that is finally trustworthy, $\alpha\!=\!0.5$ \emph{overrides} the planted-wrong text on roughly two fifths of the cases instead of being dragged along by it. The fused score is no longer pinned to the text branch.
+  \emph{Real-image dissonance, aggregate.} Re-running \path{scripts/eval_dissonant_fer2013.py} \path{--finetune-ckpt} on the full FER2013 test split ($n\!=\!3589$ deliberately mismatched rows) produces the lower row of Table~\ref{tab:dissonanceft}. Text-only stays at 4.0\,\% -- the prompt is wrong on purpose, so this is exactly what we expect -- but the fused $\alpha\!=\!0.5$ accuracy jumps from 4.3\,\% to \textbf{41.8\,\%} and face-only from 23.1\,\% to \textbf{68.5\,\%}. With a face branch that is finally trustworthy, $\alpha\!=\!0.5$ \emph{overrides} the planted-wrong text on roughly two fifths of the cases instead of being dragged along by it. The fused score is no longer pinned to the text branch.
 
   \begin{table*}[t]
     \centering
@@ -414,28 +439,23 @@
 
   \emph{Latency is unaffected.} The fine-tuned ResNet has the same architecture and parameter count as the baseline, so the per-stage timings in Table~\ref{tab:latency} are within run-to-run noise of the fine-tuned timings; we do not report a separate latency row either.
 
-  \emph{Takeaway.} Fine-tuning the visual branch on FER2013 closes most of the AffectNet-to-FER2013 domain gap (23.1\,\%~$\to$~68.5\,\% face-only top-1 on $n\!=\!3589$) and turns the bimodal system from text-dominant into genuinely bimodal. On the matched congruent benchmark, $\alpha\!=\!0.5$ moves from 81.6\,\% (a hair below the 82.6\,\% text branch) to 87.8\,\% (clearly above text alone, Table~\ref{tab:resultsft}). On the engineered-dissonance benchmark, $\alpha\!=\!0.5$ now recovers about 42\,\% of cases where it previously recovered only $\sim$4\,\% (Table~\ref{tab:dissonanceft}). The price is essentially just running the fine-tune script we ship at \texttt{scripts/finetune\_fer2013.py} and storing one extra checkpoint file; nothing in the deployed app code changes beyond which file the vision sensor loads at startup.
+  \emph{Takeaway.} Fine-tuning the visual branch on FER2013 closes most of the AffectNet-to-FER2013 domain gap (23.1\,\%~$\to$~68.5\,\% face-only top-1 on $n\!=\!3589$) and turns the bimodal system from text-dominant into genuinely bimodal. On the matched congruent benchmark, $\alpha\!=\!0.5$ moves from 81.6\,\% (a hair below the 82.6\,\% text branch) to 87.8\,\% (clearly above text alone, Table~\ref{tab:resultsft}). On the engineered-dissonance benchmark, $\alpha\!=\!0.5$ now recovers about 42\,\% of cases where it previously recovered only $\sim$4\,\% (Table~\ref{tab:dissonanceft}). The price is essentially just running the fine-tune script we ship at \path{scripts/finetune_fer2013.py} and storing one extra checkpoint file; nothing in the deployed app code changes beyond which file the vision sensor loads at startup.
 
   \subsection{Limitations}
-  We are honest about three places this study is incomplete. First, the matched-template bimodal benchmark is a probe, not a natural multimodal corpus; it measures whether aligned text and a face estimate can be fused consistently, not how well the system handles real spontaneous speech. The real-image dissonance probe is closer to deployment but still uses scripted text templates instead of utterances from actual participants. Second, the visual branch is bounded by FER2013 label noise and by the AffectNet-to-FER2013 domain shift in Section~\ref{sec:failmodes}; the deployed FLAN--T5 (base) generator is intentionally minimal and would clearly benefit from a $\geq$1B-parameter instruction-tuned backbone, especially on the Sad and Surprise rows of Table~\ref{tab:qualresponses} where the small model patterns into multiple-choice or paraphrase formats. Third, this repository does not include a formal participant Likert study; the HCI component is best interpreted as expert review plus a ready-to-run study template under \texttt{docs/HCI\_STUDY\_TEMPLATE.md}.
+  We are explicit about where this work is incomplete. \emph{Benchmark circularity.} The matched-template bimodal benchmark pairs each image with a sentence chosen by the gold label, so the text branch is told the answer; the 82.6\% text row and the 87.8\% fused row measure whether fusion is consistent, not whether the system recognises emotion. Section~\ref{sec:meld} shows that on natural MELD utterances the same text branch falls below the majority-class floor. \emph{Face-label validity.} The visual branch is bounded by FER2013 label noise and the AffectNet-to-FER2013 shift (Section~\ref{sec:failmodes}), and more fundamentally by the weak mapping from facial configuration to felt emotion~\cite{barrett2019emotional}; FER2013 also carries known demographic skew that we have not audited. \emph{Generator.} FLAN--T5 (base) is intentionally minimal; Sad and Surprise replies in Table~\ref{tab:qualresponses} show it collapsing into list or paraphrase formats, and it never sees the probability vectors, only the argmax label. \emph{LLM comparators are text-only so far.} Two LLMs on utterances alone already beat our text branch (Section~\ref{sec:meld}); the image-conditioned variant (\path{--image-col}) has not been run on MELD frames, and neither LLM reply has yet been rated by participants. \emph{No human data yet.} The Likert table in Section~\ref{sec:study} is synthetic and labelled as such; the correctness $\times$ move study is designed and implemented but not run, so every claim about perceived empathy in this document is a hypothesis. The move manipulation is partly a wording manipulation (only the assert prompt names an emotion as fact), which the paper will state.
 
   \subsection{Reproducibility checklist}
-  Every number in this report is produced by a script that lives in the repository. \texttt{scripts/run\_evaluation.py} produces Table~\ref{tab:results} and the baseline row of Table~\ref{tab:finetune}. \texttt{scripts/finetune\_fer2013.py} together with \texttt{scripts/eval\_fer\_checkpoint.py} produces the fine-tuned row of Table~\ref{tab:finetune}. \texttt{scripts/eval\_dissonant\_fer2013.py} and \texttt{scripts/build\_dissonant\_eval\_csv.py} together with \texttt{scripts/run\_ablation.py} produce Table~\ref{tab:dissonance}. \texttt{scripts/benchmark\_latency.py} produces Table~\ref{tab:latency}. \texttt{scripts/build\_qualitative\_table.py} produces Tables~\ref{tab:qualimages} and~\ref{tab:qualresponses}, and \texttt{scripts/build\_dissonant\_qualitative\_table.py} produces Tables~\ref{tab:qualdissimages} and~\ref{tab:qualdissimagesft}. Every script reads the same \texttt{.env}-supplied HuggingFace token and writes both a JSON summary and a LaTeX fragment to \texttt{docs/eval\_output/}.
+  Every number in this report is produced by a script that lives in the repository. \path{scripts/run_evaluation.py} produces Table~\ref{tab:results} and the baseline row of Table~\ref{tab:finetune}. \path{scripts/finetune_fer2013.py} together with \path{scripts/eval_fer_checkpoint.py} produces the fine-tuned row of Table~\ref{tab:finetune}. \path{scripts/eval_dissonant_fer2013.py} and \path{scripts/build_dissonant_eval_csv.py} together with \path{scripts/run_ablation.py} produce Table~\ref{tab:dissonance}. \path{scripts/benchmark_latency.py} produces Table~\ref{tab:latency}. \path{scripts/alpha_sweep.py} produces Tables~\ref{tab:alpha_sweep_ft} and~\ref{tab:alpha_sweep} with McNemar statistics; \path{scripts/eval_meld.py} produces Table~\ref{tab:meld_text} and, with \path{--video-dir}, the JSON behind Table~\ref{tab:meld_bimodal} (\path{scripts/build_meld_bimodal_table.py} renders it). \path{scripts/generate_likert_synthetic_table.py} (default $n\!=\!120$, seed~42) produces the CSV and the included fragment for Table~\ref{tab:likert_by_class}---synthetic, not live ratings. \path{scripts/build_qualitative_table.py} produces Tables~\ref{tab:qualimages} and~\ref{tab:qualresponses}, and \path{scripts/build_dissonant_qualitative_table.py} produces Tables~\ref{tab:qualdissimages} and~\ref{tab:qualdissimagesft}. Every heavy script reads the same \texttt{.env}-supplied HuggingFace token when models are required; evaluation writes JSON and LaTeX fragments to \path{docs/eval_output/}.
 
   \section{Conclusion}
   We built and evaluated the course's bimodal affective alignment stack: a transparent trust knob $\alpha$, a shared seven-class label space, late fusion, an instruction-tuned response generator, and a Streamlit interface that exposes every intermediate signal rather than hiding it. The numbers in this report are produced end-to-end from public datasets and scripted evaluations -- congruent unimodal/fused benchmarks, real-image and synthetic dissonance probes, $\alpha$ sensitivity, latency, per-class qualitative cases, and FLAN--T5 reply samples. The strongest engineering result is the visual fine-tune, which lifts the FER2013 face branch from 23.1\% to 68.5\% and, in turn, lifts fused congruent accuracy from 81.6\% to 87.8\% and fused dissonance accuracy from 4.3\% to 41.8\%. The remaining course deliverables -- external screenshots, slide deck, and any optional participant Likert data -- are scoped to fit the same evaluation harness when they are collected.
 
   \section*{Data and code availability}
-  All source code, the \texttt{README.md} clone-and-reproduce guide, and a build guide for this report live in the project repository. Pretrained weights and the GoEmotions and FER2013 datasets are pulled from HuggingFace on first use; generated tables and JSON summaries land under \texttt{docs/eval\_output/}. The fine-tuned FER checkpoint sits under \texttt{checkpoints/} and is intentionally excluded from version control so that re-running the fine-tune script remains the reference path.
+  All source code, the \path{README.md} clone-and-reproduce guide, and a build guide for this report live in the project repository. Pretrained weights and the GoEmotions and FER2013 datasets are pulled from HuggingFace on first use; generated tables and JSON summaries land under \path{docs/eval_output/}. The fine-tuned FER checkpoint sits under \path{checkpoints/} and is intentionally excluded from version control so that re-running the fine-tune script remains the reference path.
 
   % References + column balance
   \balance
-  \begin{thebibliography}{99}
-  \sloppy\small
-  \bibitem{card1983human} S.~K.~Card, A.~Newell, and T.~P.~Moran. 1983. \emph{The Psychology of Human--Computer Interaction.} Lawrence Erlbaum. (Cited for interaction--time and usability background.)
-  \bibitem{demeszky2020goemotions} D.~Demszky, D.~Movshovitz--Attias, J.~Ko, A.~Grot, and others. 2020. GoEmotions: A Dataset of Fine--Grained Emotions. In \emph{Proc.\ ACL,} 4940--4951.
-  \bibitem{goodfellow2013challenges} I.~J.~Goodfellow et~al. 2013. Challenges in representation learning. In \emph{ICMLW.}
-  \bibitem{chung2022scaling} H.~W.~Chung et~al. 2022. Scaling instruction--finetuned language models. \emph{J.\ Mach.\ Learn.\ Res.}~23(70):1--108.
-  \end{thebibliography}
+  \bibliographystyle{ACM-Reference-Format}
+  \bibliography{bimodal_report}
 
   \end{document}

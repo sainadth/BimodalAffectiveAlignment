@@ -79,6 +79,9 @@ docs/slides_build.log
 /tmp/*.log
 nohup.out
 
+# Local Likert / HCI study rows (use data/likert_responses.example.csv as a template)
+data/likert_responses.csv
+
 # OS / editor metadata
 .DS_Store
 Thumbs.db
@@ -97,3 +100,18 @@ docs/superpowers/
 
 # Jupyter / notebook checkpoints
 .ipynb_checkpoints/
+
+# MELD raw corpus (10.9 GB) and extracted frames
+data/meld/MELD.Raw.tar.gz
+data/meld/MELD.Raw/
+data/meld/test/
+data/study_responses.csv
+data/meld/test_extract/
+data/participants.json
+web/node_modules/
+web/dist/
+docs/storm/*/llm_call_history.jsonl
+LR/*.pdf
+!LR/README.md
+!LR/LITERATURE_MAP.md
+data/frames/

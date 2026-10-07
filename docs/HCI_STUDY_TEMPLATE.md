@@ -1,6 +1,12 @@
 # HCI evaluation template (Project.pdf §3.2)
 
+> **For the publication study use `docs/STUDY_PROTOCOL.md`** (within-subjects, PETS scale, pre-specified analysis). This file is the original course-rubric template and describes the quick 3-item logger available in the app's Researcher mode.
+
 Use this in your report; fill in or delete sections as your instructor allows.
+
+## In-app Likert (Streamlit)
+
+After **Analyze & generate**, the demo (Researcher mode) shows **5-point Likert** radio items (Empathy, Social presence, Affective congruency) and **Save Likert row to study log (CSV)**. Each click appends one row to `data/likert_responses.csv` (or set env **`LIKERT_CSV`** to another path). Optional **Participant ID** in the sidebar is written to the CSV. Commit **`data/likert_responses.example.csv`** for format reference; the live file is **gitignored** to avoid PII in version control.
 
 ## Affective congruency (expert or self review)
 

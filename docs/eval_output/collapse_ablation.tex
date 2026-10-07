@@ -1,0 +1,19 @@
+% Auto-generated: scripts/collapse_ablation.py
+\begin{table}[t]
+  \centering
+  \caption{How the 28$\to$7 label collapse is computed matters on natural text: RoBERTa-GoEmotions sigmoids on MELD test ($n=2610$), same model, different aggregation. The logistic map is fitted on MELD train ($n=9989$), so it is the only variant that has seen dialogue.}
+  \label{tab:collapse_ablation}
+  \small
+  \begin{tabular}{@{}l r r l@{}}
+    \toprule
+    Aggregation & Top-1 (\%) & Macro-F1 & 95\% CI \\
+    \midrule
+    Surjection, sum (paper default) & 43.0 & 0.278 & [41.1, 44.9] \\
+    Surjection, max & 43.7 & 0.274 & [41.8, 45.6] \\
+    Surjection, bin-mean & 50.9 & 0.253 & [49.0, 52.8] \\
+    Logistic 28$\to$7, fit on MELD train & 55.6 & 0.292 & [53.7, 57.5] \\
+    Logistic 28$\to$7, class-balanced & 45.6 & 0.318 & [43.7, 47.5] \\
+    Majority class (Neutral) & 48.1 & 0.093 & [46.2, 50.0] \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -1,0 +1,17 @@
+% Auto-generated: scripts/eval_meld.py
+\begin{table}[t]
+  \centering
+  \caption{Text branch on natural utterances: MELD test split ($n=2610$), MELD 7-way labels mapped 1:1 to FER-7; LLM rows: \texttt{scripts/llm\_baseline.py}, utterance only, no fine-tuning; $n$ = rows with a parsable label (2608 / 2610). Majority-class (Neutral) floor 48.1\%.}
+  \label{tab:meld_text}
+  \small
+  \begin{tabular}{@{}l r r l@{}}
+    \toprule
+    Mode & Top-1 (\%) & Macro-F1 & 95\% CI \\
+    \midrule
+    Majority class & 48.1 & -- & -- \\
+    Text only (RoBERTa$\to$FER-7) & 43.0 & 0.278 & [41.1, 44.9] \\
+    LLM only, gpt-oss-120b via Groq (open) & 54.1 & 0.410 & [52.2, 56.0] \\
+    LLM only, Claude Opus 5 (closed) & 53.2 & 0.455 & [51.3, 55.1] \\
+    \bottomrule
+  \end{tabular}
+\end{table}

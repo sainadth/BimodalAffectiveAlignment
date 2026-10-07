@@ -1,0 +1,47 @@
+# Overview
+## Definition and scope
+## Historical background
+## Relevance to language‑model research
+# Theoretical Foundations
+## Emotion attribution in human communication
+## Misattribution mechanisms in artificial agents
+## Asserting versus asking in dialogue systems
+# Label Correctness in LLM Chatbot Replies
+## Annotation standards for emotional labels
+## Sources of labeling errors
+## Consequences of incorrect labels for user perception
+# Assertive vs. Interrogative Emotion Labeling
+## Functional differences in conversational turns
+## Influence on perceived authority
+## Influence on perceived empathy
+## Empirical evidence comparing assertion and clarification
+# Measuring Perceived Empathy
+## Psychometric scales (CAPE, PETS, CES‑LCC) and validation
+## Survey items and user‑rating protocols
+## Experimental variables affecting empathy scores (persona, length, topic)
+# Experimental Evaluation of Misattributed Emotion
+## Design of controlled studies (within‑subjects, between‑subjects)
+## Sample characteristics and size considerations
+## Manipulations: correct label, misattributed label, assertive vs. interrogative phrasing
+## Data collection and annotation procedures
+## Statistical analysis approaches
+# Mitigation Strategies
+## Model‑level techniques
+### Reinforcement learning from human feedback
+### Multi‑task learning for emotion recognition
+## Post‑processing and response filtering
+## Interface design to surface uncertainty or request clarification
+# Applications and Implications
+## Customer‑service and support bots
+## Mental‑health and counseling chatbots
+## Trust, safety, and ethical considerations
+# Criticisms and Controversies
+## Anthropomorphism and user expectations
+## Risks of over‑reliance on perceived empathy
+## Challenges in standardizing emotion labels
+# Future Directions
+## Advances in emotion‑aware language models
+## Multimodal affect detection integration
+## Adaptive empathy and personalized affective responses
+## Emerging research venues and key scholarly works
+## Open datasets, tools, and community resources

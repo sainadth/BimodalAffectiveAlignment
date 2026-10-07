@@ -1,0 +1,9 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "n": 2610,
+  "refusals": 0,
+  "gold_n": 2610,
+  "llm_top1": 0.5409961685823754,
+  "total_input_tokens": 551646,
+  "total_output_tokens": 163140
+}

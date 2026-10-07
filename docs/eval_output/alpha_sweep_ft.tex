@@ -1,0 +1,24 @@
+% Auto-generated: scripts/alpha_sweep.py --vision finetuned --limit 3589
+\begin{table}[t]
+  \centering
+  \caption{$\alpha$ sensitivity on the FER2013 congruent benchmark (fine-tuned vision branch, $n=3589$). Top-1 accuracy, macro-F1, Wilson 95\% CI. Majority-class floor 24.5\%. McNemar $\alpha{=}0.5$ vs.\ $\alpha{=}1$: $b=299, c=111, \chi^2=85.29, p<10^{-19}$.}
+  \label{tab:alpha_sweep_ft}
+  \small
+  \begin{tabular}{@{}c r r l@{}}
+    \toprule
+    $\alpha$ & Top-1 (\%) & Macro-F1 & 95\% CI \\
+    \midrule
+    0.00 & 68.5 & 0.661 & [66.9, 70.0] \\
+    0.10 & 70.8 & 0.683 & [69.3, 72.2] \\
+    0.20 & 73.6 & 0.708 & [72.1, 75.0] \\
+    0.30 & 78.4 & 0.762 & [77.0, 79.7] \\
+    0.40 & 84.3 & 0.833 & [83.1, 85.5] \\
+    0.50 & 87.8 & 0.880 & [86.7, 88.8] \\
+    0.60 & 82.5 & 0.815 & [81.2, 83.7] \\
+    0.70 & 82.5 & 0.819 & [81.2, 83.7] \\
+    0.80 & 82.6 & 0.820 & [81.3, 83.8] \\
+    0.90 & 82.6 & 0.820 & [81.3, 83.8] \\
+    1.00 & 82.6 & 0.820 & [81.3, 83.8] \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -1,0 +1,72 @@
+%% CHI 2027 Late-Breaking Work draft (target ~6 pages + refs). Build: tectonic -X compile lbw.tex
+%% Shares eval_output/ fragments and bimodal_report.bib with main.tex.
+\documentclass[sigconf,nonacm]{acmart}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xurl}
+\usepackage{balance}
+\graphicspath{{eval_output/}{./}}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\settopmatter{printacmref=false,printfolios=true}
+
+\title[When the Affect Sensor Is Wrong]{When the Affect Sensor Is Wrong: Correctness, Conversational Move, and the Cost of Misattributed Empathy in LLM Replies}
+
+\author{Sainadth Pagadala}
+\email{spagadala1@islander.tamucc.edu}
+\affiliation{\institution{Texas A\&M University--Corpus Christi}\city{Corpus Christi}\state{TX}\country{USA}}
+\author{Minhua Huang}
+\authornote{Course instructor and project advisor.}
+\email{minhua.huang@tamucc.edu}
+\affiliation{\institution{Texas A\&M University--Corpus Christi}\city{Corpus Christi}\state{TX}\country{USA}}
+\renewcommand{\shortauthors}{Pagadala and Huang}
+
+\begin{CCSXML}
+<ccs2012>
+<concept><concept_id>10003120.10003121</concept_id><concept_desc>Human-centered computing~Human computer interaction (HCI)</concept_desc><concept_significance>500</concept_significance></concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Human-centered computing~Human computer interaction (HCI)}
+\keywords{affective computing, perceived empathy, multimodal fusion, emotion recognition, large language models, dissonance}
+
+\begin{document}
+\begin{abstract}
+Conversational agents increasingly read affect from a user's words, and some also read the face. Prior studies that fed an LLM a facial-emotion label on every turn found no gain in perceived empathy. We ask the question those averages hide: when the sensor is \emph{wrong}, what does it cost, is the cost larger than the gain from being right, and does asking about the emotion instead of asserting it soften the cost? We first report what such a sensor actually achieves on natural dialogue. A RoBERTa--GoEmotions text branch mapped to seven FER classes reaches 43.0\% top-1 on the MELD test split, below the 48.1\% majority-class floor; a FER2013-fine-tuned ResNet-50 face branch reaches 22.8\% on face-cropped MELD frames; a convex late fusion lowers accuracy relative to text at every trust weight below 0.7; and two off-the-shelf LLMs given only the utterance reach 53--54\%. Because such sensors are wrong more often than right on natural input, we manipulate correctness directly: a within-subjects $3\times2$ design crossing label source (the participant's self-reported emotion, an opposite-valence label, none) with conversational move (assert vs.\ ask), with self-report collected before generation, a per-trial manipulation check, a pre-specified analysis, and a remote participant app with consent, debrief and data withdrawal. We release the pipeline, evaluation scripts and study instrument.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+A polite ``I'm fine'' with a sad face is the case every affect-aware agent is built for and almost none is evaluated on. Text-only emotion classifiers are fooled by masking; face-only classifiers are fooled by lighting, pose and the weak link between facial configuration and felt emotion~\cite{barrett2019emotional}. Reading both channels and flagging when they disagree is the obvious remedy, and it is cheap to build from public components. Whether it changes anything the \emph{user} perceives is a separate question, and it is the one we pursue.
+
+We built the obvious system: a RoBERTa classifier fine-tuned on GoEmotions~\cite{liu2019roberta,demszky2020goemotions} collapsed to the seven FER classes, a ResNet-50 face classifier~\cite{he2016resnet,goodfellow2013challenges}, a late convex fusion with a user-facing trust weight $\alpha$, a dissonance flag, and an LLM reply generator conditioned on the result. Then we measured it honestly on natural dialogue (Section~\ref{sec:bench}). The sensor is weak, fusion does not help, and a general LLM out-reads it on text alone. That finding reframes the contribution: the pipeline is not a recognition result, it is an instrument for asking whether sensor-derived affect changes perceived empathy \emph{beyond what the LLM infers by itself}. Section~\ref{sec:study} describes the pre-specified within-subjects study built to answer that, including the control arm our benchmarks say is indispensable.
+
+\section{Related work}
+\paragraph{Multimodal emotion recognition.} Natural corpora such as IEMOCAP~\cite{busso2008iemocap}, CMU-MOSEI~\cite{zadeh2018mosei} and MELD~\cite{poria2019meld} define the setting; fusion ranges from decision-level blends to tensor fusion~\cite{zadeh2017tensor} and cross-modal attention~\cite{tsai2019mult}, and multimodal LLMs are absorbing the pipeline~\cite{zhang2026mer_llm_survey}. E-THER~\cite{tahir2025ether} annotates verbal--visual incongruence and argues mismatch awareness is a prerequisite for empathic AI; our dissonance flag is a lightweight operationalisation.
+\paragraph{Empathetic response generation.} EmpatheticDialogues~\cite{rashkin2019empathetic}, MoEL~\cite{lin2019moel}, MIME~\cite{majumder2020mime}, CEM~\cite{sabour2022cem} and Emotional Chatting Machine~\cite{zhou2018ecm} condition a generator on a recognised emotion; Sharma et~al.~\cite{sharma2020epitome} decompose expressed empathy; speech~\cite{wang2024blspemo} and multi-agent multimodal variants~\cite{wang2026multiagent_merg} exist. We supply the label from a bimodal, user-inspectable sensor and test against the generator alone.
+\paragraph{Measuring perceived empathy.} Empathy is contested even for humans~\cite{cuff2016empathy}; PETS~\cite{schmidmaier2024pets} is a validated ten-item instrument for systems. We use one PETS item per trial and the full scale once, following its whole-interaction validation. Rank-based analyses follow~\cite{wobbrock2011art}; paired accuracy comparisons use McNemar~\cite{mcnemar1947note} and Wilson intervals~\cite{wilson1927probable}.
+
+\section{System}
+Let $P_\text{text}, P_\text{face} \in \mathbb{R}^7$ be the branch distributions. The fused decision is $b^* = \arg\max_k \big(\alpha P_\text{text}(k) + (1-\alpha) P_\text{face}(k)\big)$ with $\alpha \in [0,1]$ exposed to the user. The text branch collapses 28 GoEmotions sigmoids into FER-7 bins (sum by default; Section~\ref{sec:bench} ablates this). The face branch is a ResNet-50 pre-trained on AffectNet~\cite{mollahosseini2019affectnet} and fine-tuned on FER2013, fed a YuNet face crop. Two dissonance flags are computed: argmax disagreement, and a stricter valence-level flag requiring both branches to be confident and to disagree in valence with a negative side. The reply generator is an LLM (\texttt{gpt-oss-120b} via Groq, low reasoning effort, $\approx$0.5\,s) given a condition-specific prompt; a local FLAN--T5 path exists for offline demos but is not used in the study.
+
+\section{Benchmarks: what the sensor actually does}\label{sec:bench}
+\paragraph{Template benchmark and its artefact.} Pairing each FER2013 test image with one of seven emotion-matched template sentences gives 87.8\% fused top-1 with the fine-tuned face branch versus 82.6\% for text alone ($n\!=\!3589$; McNemar $b\!=\!299$, $c\!=\!111$, $p\!<\!10^{-19}$). The entire gain is the Neutral template being read as Happy by the text branch and rescued by the face; with seven distinct sentences the text branch's effective sample size is seven. We report it only to show why it must not be trusted. Tables~\ref{tab:alpha_sweep_ft} and~\ref{tab:alpha_sweep} give the full $\alpha$ sweep with macro-F1.
+\paragraph{Natural dialogue.} On MELD test (Table~\ref{tab:meld_text}) the text branch is at 43.0\% top-1 / macro-F1 0.278, below the Neutral floor; two LLMs given the utterance alone reach 53--54\%. With faces cropped from the middle frame of each clip (Table~\ref{tab:meld_bimodal}), the face branch is at 15.3\% (baseline) and 22.8\% (fine-tuned), and fusing either with text at $\alpha\!=\!0.5$ lowers accuracy relative to text. The label-collapse ablation (Table~\ref{tab:collapse_ablation}) shows part of the text deficit is structural: thirteen GoEmotions labels feed the Happy bin against one for Neutral.
+\input{eval_output/meld_text_table}
+\input{eval_output/meld_bimodal_table}
+\input{eval_output/collapse_ablation}
+\input{eval_output/alpha_sweep_ft}
+\input{eval_output/alpha_sweep}
+
+\section{Study design}\label{sec:study}
+Two studies have already fed an LLM chatbot a facial-emotion label on every turn and found no significant change in perceived empathy (Schmidmaier et~al.\ 2025, $N\!=\!200$; a four-condition $N\!=\!28$ study, 2025). Our benchmarks explain why that average may hide the effect: off-the-shelf sensors are wrong on natural input more often than they are right, so gains from correct reads and penalties from wrong ones are mixed in every arm. We therefore manipulate \emph{correctness} rather than the presence of the face channel, and cross it with the agent's \emph{conversational move}. The design is within-subjects $3\!\times\!2$, one generator (\texttt{gpt-oss-120b}, one system prompt): the model is told the emotion the participant has just reported (\emph{correct}), a label of opposite valence (\emph{wrong}), or nothing (\emph{none}), and is instructed either to \emph{assert} how the user seems to feel or to \emph{ask} about it. Twelve trials in two Williams-square blocks; one scripted affect-elicitation trial per block. Participants report the emotion they actually feel \emph{before} the reply is generated; that report defines the correct label and yields live sensor accuracy as a by-product. After each reply they rate three items (matched how I felt; warm and understanding; considered my mental state) and answer a manipulation check; PETS is administered once, with a blinding funnel and an in-app debrief with data withdrawal. Hypotheses, pre-registered: H1 correct $>$ wrong; H2 penalty (none$-$wrong) exceeds gain (correct$-$none); H3 asking softens the penalty. Target $n\!=\!42$; Friedman omnibus, Holm-corrected Wilcoxon on six named contrasts, rank-biserial effect sizes with bootstrap CIs, and a sensitivity analysis on manipulation-check-passed trials, all implemented before data collection. The participant app enforces the protocol: unique links, required face burst, reply withheld until the felt report, trial order, resume after refresh, and refusal to start without the fixed generator.
+
+\section{Limitations and expected outcomes}
+The move manipulation is partly a wording manipulation: only the assert prompt states an emotion as fact, so ``asking softens the penalty'' will be a claim about phrasing, not about dialogue strategy in general. Wrong labels are opposite-valence by construction; same-valence errors (Fear for Sad) are not tested. The face sensor is weak on spontaneous frames, which is precisely why correctness is manipulated by design rather than left to the sensor; its live accuracy against self-report is reported as context. Face-based emotion inference is contested~\cite{barrett2019emotional}; participants are told so at debrief. Every outcome is informative: a steep asymmetry explains prior nulls and argues for confidence-gated or question-based delivery; no asymmetry means sensor errors are cheap and presence-of-sensor studies were underpowered rather than misdirected; no correctness effect means the model's phrasing dominates and affect sensing is redundant once an LLM writes the reply.
+
+\section{Conclusion}
+We built the standard bimodal affect pipeline, measured it on natural dialogue, and found it does not beat a language model reading the words alone. Rather than dress that up, we turned the pipeline into an instrument and designed the study that can tell whether sensor-derived affect, including dissonance, changes how empathic an agent feels. Code, evaluation scripts, the participant app and the protocol are released.
+
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bimodal_report}
+\end{document}

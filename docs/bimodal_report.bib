@@ -1,13 +1,335 @@
-% Optional BibTeX (if you switch the .tex back to \bibliography{bimodal_report})
-@inproceedings{demeszky2020goemotions,
-  author    = {Demszky, Dorottya and Movshovitz-Attias, Dana and Ko, Jeongrae and Grot, Alan and Nemade, Mansi and Qin, Aditya and Guo, Ziheng and He, Justin and others},
+% Bibliography for the bimodal affective alignment paper.
+% Build: pdflatex main && bibtex main && pdflatex main && pdflatex main
+% acmart: \bibliographystyle{ACM-Reference-Format} \bibliography{bimodal_report}
+
+% ---------- Datasets & backbones used ----------
+@inproceedings{demszky2020goemotions,
+  author    = {Demszky, Dorottya and Movshovitz-Attias, Dana and Ko, Jeongwoo and Cowen, Alan and Nemade, Gaurav and Ravi, Sujith},
   title     = {{GoEmotions}: A Dataset of Fine-Grained Emotions},
-  booktitle = {Proc.~58th Annual Meeting of the Association for Computational Linguistics},
-  year      = {2020}
+  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {4040--4054},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.acl-main.372}
+}
+@inproceedings{goodfellow2013challenges,
+  author    = {Goodfellow, Ian J. and Erhan, Dumitru and Carrier, Pierre Luc and Courville, Aaron and Mirza, Mehdi and Hamner, Ben and Cukierski, Will and Tang, Yichuan and Thaler, David and Lee, Dong-Hyun and others},
+  title     = {Challenges in Representation Learning: A Report on Three Machine Learning Contests},
+  booktitle = {Neural Information Processing (ICONIP)},
+  pages     = {117--124},
+  year      = {2013},
+  doi       = {10.1007/978-3-642-42051-1_16}
+}
+@article{mollahosseini2019affectnet,
+  author    = {Mollahosseini, Ali and Hasani, Behzad and Mahoor, Mohammad H.},
+  title     = {{AffectNet}: A Database for Facial Expression, Valence, and Arousal Computing in the Wild},
+  journal   = {IEEE Transactions on Affective Computing},
+  volume    = {10},
+  number    = {1},
+  pages     = {18--31},
+  year      = {2019},
+  doi       = {10.1109/TAFFC.2017.2740923}
+}
+@article{chung2024scaling,
+  author    = {Chung, Hyung Won and Hou, Le and Longpre, Shayne and Zoph, Barret and Tay, Yi and Fedus, William and Li, Yunxuan and Wang, Xuezhi and Dehghani, Mostafa and Brahma, Siddhartha and others},
+  title     = {Scaling Instruction-Finetuned Language Models},
+  journal   = {Journal of Machine Learning Research},
+  volume    = {25},
+  number    = {70},
+  pages     = {1--53},
+  year      = {2024}
+}
+@article{liu2019roberta,
+  author    = {Liu, Yinhan and Ott, Myle and Goyal, Naman and Du, Jingfei and Joshi, Mandar and Chen, Danqi and Levy, Omer and Lewis, Mike and Zettlemoyer, Luke and Stoyanov, Veselin},
+  title     = {{RoBERTa}: A Robustly Optimized {BERT} Pretraining Approach},
+  journal   = {arXiv preprint arXiv:1907.11692},
+  year      = {2019}
+}
+@inproceedings{he2016resnet,
+  author    = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  title     = {Deep Residual Learning for Image Recognition},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {770--778},
+  year      = {2016},
+  doi       = {10.1109/CVPR.2016.90}
+}
+
+% ---------- Natural multimodal emotion corpora ----------
+@inproceedings{poria2019meld,
+  author    = {Poria, Soujanya and Hazarika, Devamanyu and Majumder, Navonil and Naik, Gautam and Cambria, Erik and Mihalcea, Rada},
+  title     = {{MELD}: A Multimodal Multi-Party Dataset for Emotion Recognition in Conversations},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {527--536},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1050}
+}
+@article{busso2008iemocap,
+  author    = {Busso, Carlos and Bulut, Murtaza and Lee, Chi-Chun and Kazemzadeh, Abe and Mower, Emily and Kim, Samuel and Chang, Jeannette N. and Lee, Sungbok and Narayanan, Shrikanth S.},
+  title     = {{IEMOCAP}: Interactive Emotional Dyadic Motion Capture Database},
+  journal   = {Language Resources and Evaluation},
+  volume    = {42},
+  number    = {4},
+  pages     = {335--359},
+  year      = {2008},
+  doi       = {10.1007/s10579-008-9076-0}
+}
+@inproceedings{zadeh2018mosei,
+  author    = {Zadeh, AmirAli Bagher and Liang, Paul Pu and Poria, Soujanya and Cambria, Erik and Morency, Louis-Philippe},
+  title     = {Multimodal Language Analysis in the Wild: {CMU-MOSEI} Dataset and Interpretable Dynamic Fusion Graph},
+  booktitle = {Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {2236--2246},
+  year      = {2018},
+  doi       = {10.18653/v1/P18-1208}
+}
+@article{tahir2025ether,
+  author    = {Tahir, Sharjeel and Johnson, Judith and Abu-Khalaf, Jumana and Shah, Syed Afaq Ali},
+  title     = {{E-THER}: A Multimodal Dataset for Empathic {AI} -- Towards Emotional Mismatch Awareness},
+  journal   = {arXiv preprint arXiv:2509.02100},
+  year      = {2025}
+}
+
+% ---------- Multimodal fusion ----------
+@article{baltrusaitis2019multimodal,
+  author    = {Baltru{\v{s}}aitis, Tadas and Ahuja, Chaitanya and Morency, Louis-Philippe},
+  title     = {Multimodal Machine Learning: A Survey and Taxonomy},
+  journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume    = {41},
+  number    = {2},
+  pages     = {423--443},
+  year      = {2019},
+  doi       = {10.1109/TPAMI.2018.2798607}
+}
+@inproceedings{zadeh2017tensor,
+  author    = {Zadeh, Amir and Chen, Minghai and Poria, Soujanya and Cambria, Erik and Morency, Louis-Philippe},
+  title     = {Tensor Fusion Network for Multimodal Sentiment Analysis},
+  booktitle = {Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {1103--1114},
+  year      = {2017},
+  doi       = {10.18653/v1/D17-1115}
+}
+@inproceedings{tsai2019mult,
+  author    = {Tsai, Yao-Hung Hubert and Bai, Shaojie and Liang, Paul Pu and Kolter, J. Zico and Morency, Louis-Philippe and Salakhutdinov, Ruslan},
+  title     = {Multimodal Transformer for Unaligned Multimodal Language Sequences},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {6558--6569},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1656}
+}
+@article{zhang2026mer_llm_survey,
+  author    = {Zhang, Hongrui and Wu, Daiqing and Li, Yangyang and Liu, Kuien and Wang, Yuhui and Zhou, Yu and Zhao, Sicheng},
+  title     = {Multimodal Emotion Recognition with Large Language Models},
+  journal   = {arXiv preprint arXiv:2605.21239},
+  year      = {2026}
+}
+
+% ---------- Empathetic response generation ----------
+@inproceedings{rashkin2019empathetic,
+  author    = {Rashkin, Hannah and Smith, Eric Michael and Li, Margaret and Boureau, Y-Lan},
+  title     = {Towards Empathetic Open-domain Conversation Models: A New Benchmark and Dataset},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages     = {5370--5381},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1534}
+}
+@inproceedings{lin2019moel,
+  author    = {Lin, Zhaojiang and Madotto, Andrea and Shin, Jamin and Xu, Peng and Fung, Pascale},
+  title     = {{MoEL}: Mixture of Empathetic Listeners},
+  booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {121--132},
+  year      = {2019},
+  doi       = {10.18653/v1/D19-1012}
+}
+@inproceedings{majumder2020mime,
+  author    = {Majumder, Navonil and Hong, Pengfei and Peng, Shanshan and Lu, Jiankun and Ghosal, Deepanway and Gelbukh, Alexander and Mihalcea, Rada and Poria, Soujanya},
+  title     = {{MIME}: {MIMicking} Emotions for Empathetic Response Generation},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {8968--8979},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-main.721}
+}
+@inproceedings{sabour2022cem,
+  author    = {Sabour, Sahand and Zheng, Chujie and Huang, Minlie},
+  title     = {{CEM}: Commonsense-Aware Empathetic Response Generation},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {36},
+  pages     = {11229--11237},
+  year      = {2022},
+  doi       = {10.1609/aaai.v36i10.21373}
+}
+@inproceedings{zhou2018ecm,
+  author    = {Zhou, Hao and Huang, Minlie and Zhang, Tianyang and Zhu, Xiaoyan and Liu, Bing},
+  title     = {Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {32},
+  year      = {2018}
+}
+@inproceedings{sharma2020epitome,
+  author    = {Sharma, Ashish and Miner, Adam S. and Atkins, David C. and Althoff, Tim},
+  title     = {A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {5263--5276},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-main.425}
+}
+@inproceedings{wang2024blspemo,
+  author    = {Wang, Chen and Liao, Minpeng and Huang, Zhongqiang and Wu, Junhong and Zong, Chengqing and Zhang, Jiajun},
+  title     = {{BLSP-Emo}: Towards Empathetic Large Speech-Language Models},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  year      = {2024}
+}
+@article{wang2026multiagent_merg,
+  author    = {Wang, Liping and Ye, Cheng and Chen, Weidong and Song, Peipei and Hu, Bo and Mao, Zhendong},
+  title     = {A Multi-Agent Framework with Structured Reasoning and Reflective Refinement for Multimodal Empathetic Response Generation},
+  journal   = {arXiv preprint arXiv:2604.18988},
+  year      = {2026}
+}
+
+% ---------- Affective computing, emotion theory, critique ----------
+@book{picard1997affective,
+  author    = {Picard, Rosalind W.},
+  title     = {Affective Computing},
+  publisher = {MIT Press},
+  address   = {Cambridge, MA},
+  year      = {1997}
+}
+@article{ekman1971universals,
+  author    = {Ekman, Paul and Friesen, Wallace V.},
+  title     = {Constants Across Cultures in the Face and Emotion},
+  journal   = {Journal of Personality and Social Psychology},
+  volume    = {17},
+  number    = {2},
+  pages     = {124--129},
+  year      = {1971},
+  doi       = {10.1037/h0030377}
+}
+@article{russell1980circumplex,
+  author    = {Russell, James A.},
+  title     = {A Circumplex Model of Affect},
+  journal   = {Journal of Personality and Social Psychology},
+  volume    = {39},
+  number    = {6},
+  pages     = {1161--1178},
+  year      = {1980},
+  doi       = {10.1037/h0077714}
+}
+@article{barrett2019emotional,
+  author    = {Barrett, Lisa Feldman and Adolphs, Ralph and Marsella, Stacy and Martinez, Aleix M. and Pollak, Seth D.},
+  title     = {Emotional Expressions Reconsidered: Challenges to Inferring Emotion From Human Facial Movements},
+  journal   = {Psychological Science in the Public Interest},
+  volume    = {20},
+  number    = {1},
+  pages     = {1--68},
+  year      = {2019},
+  doi       = {10.1177/1529100619832930}
+}
+@article{cuff2016empathy,
+  author    = {Cuff, Benjamin M. P. and Brown, Sarah J. and Taylor, Laura and Howat, Douglas J.},
+  title     = {Empathy: A Review of the Concept},
+  journal   = {Emotion Review},
+  volume    = {8},
+  number    = {2},
+  pages     = {144--153},
+  year      = {2016},
+  doi       = {10.1177/1754073914558466}
+}
+
+% ---------- HCI measurement & method ----------
+@inproceedings{schmidmaier2024pets,
+  author    = {Schmidmaier, Matthias and Rupp, Jonathan and Cvetanova, Darina and Mayer, Sven},
+  title     = {Perceived Empathy of Technology Scale ({PETS}): Measuring Empathy of Systems Toward the User},
+  booktitle = {Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems},
+  year      = {2024},
+  doi       = {10.1145/3613904.3642035}
+}
+@article{biocca2003social,
+  author    = {Biocca, Frank and Harms, Chad and Burgoon, Judee K.},
+  title     = {Toward a More Robust Theory and Measure of Social Presence: Review and Suggested Criteria},
+  journal   = {Presence: Teleoperators and Virtual Environments},
+  volume    = {12},
+  number    = {5},
+  pages     = {456--480},
+  year      = {2003},
+  doi       = {10.1162/105474603322761270}
+}
+@book{short1976social,
+  author    = {Short, John and Williams, Ederyn and Christie, Bruce},
+  title     = {The Social Psychology of Telecommunications},
+  publisher = {John Wiley \& Sons},
+  address   = {London},
+  year      = {1976}
 }
 @book{card1983human,
-  author    = {Card, Stuart K. and Newell, Allen and Moran, Thomas P.},
+  author    = {Card, Stuart K. and Moran, Thomas P. and Newell, Allen},
   title     = {The Psychology of Human-Computer Interaction},
   publisher = {Lawrence Erlbaum Associates},
+  address   = {Hillsdale, NJ},
   year      = {1983}
+}
+@article{doherty1982economic,
+  author    = {Doherty, Walter J. and Thadani, Ahrvind J.},
+  title     = {The Economic Value of Rapid Response Time},
+  journal   = {IBM Technical Report GE20-0752-0},
+  year      = {1982}
+}
+@inproceedings{wobbrock2011art,
+  author    = {Wobbrock, Jacob O. and Findlater, Leah and Gergle, Darren and Higgins, James J.},
+  title     = {The Aligned Rank Transform for Nonparametric Factorial Analyses Using Only {ANOVA} Procedures},
+  booktitle = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
+  pages     = {143--146},
+  year      = {2011},
+  doi       = {10.1145/1978942.1978963}
+}
+@article{mcnemar1947note,
+  author    = {McNemar, Quinn},
+  title     = {Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages},
+  journal   = {Psychometrika},
+  volume    = {12},
+  number    = {2},
+  pages     = {153--157},
+  year      = {1947},
+  doi       = {10.1007/BF02295996}
+}
+@article{wilson1927probable,
+  author    = {Wilson, Edwin B.},
+  title     = {Probable Inference, the Law of Succession, and Statistical Inference},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {22},
+  number    = {158},
+  pages     = {209--212},
+  year      = {1927},
+  doi       = {10.1080/01621459.1927.10502953}
+}
+
+% ---------- Added 2026-09-11 from STORM run (verified against arXiv abstracts) ----------
+@article{inoshita2026uncertainty,
+  author    = {Inoshita, Keito and Zhou, Xiaokang and Kawai, Akira and Yada, Katsutoshi},
+  title     = {{LLMs} Capture Emotion Labels, Not Emotion Uncertainty: Distributional Analysis and Calibration of Human-{LLM} Judgment Gaps},
+  journal   = {arXiv preprint arXiv:2604.27345},
+  year      = {2026}
+}
+@article{liu2024illusionconversation,
+  author    = {Liu, Tingting and Giorgi, Salvatore and Aich, Ankit and Lahnala, Allison and Curtis, Brenda and Ungar, Lyle and Sedoc, Jo{\~a}o},
+  title     = {The Illusion of Empathy: How {AI} Chatbots Shape Conversation Perception},
+  journal   = {arXiv preprint arXiv:2411.12877},
+  year      = {2024}
+}
+@article{suh2025sense7,
+  author    = {Suh, Jina and Le, Lindy and Shayegani, Erfan and Ramos, Gonzalo and Amores, Judith and Ong, Desmond C. and Czerwinski, Mary and Hernandez, Javier},
+  title     = {{SENSE-7}: Taxonomy and Dataset for Measuring User Perceptions of Empathy in Sustained Human-{AI} Conversations},
+  journal   = {arXiv preprint arXiv:2509.16437},
+  year      = {2025}
+}
+@article{brun2025emotionsensitive,
+  author    = {Brun, Antonin and Liu, Ruying and Shukla, Aryan and Watson, Frances and Gratch, Jonathan},
+  title     = {Exploring Emotion-Sensitive {LLM}-Based Conversational {AI}},
+  journal   = {arXiv preprint arXiv:2502.08920},
+  year      = {2025}
+}
+@article{cao2024forgiveness,
+  author    = {Cao, Bolin and Li, Zhiyuan and Jiang, L. Crystal},
+  title     = {When Chatbots Make Errors: Cognitive and Affective Pathways to Understanding Forgiveness of Chatbot Errors},
+  journal   = {Telematics and Informatics},
+  volume    = {94},
+  pages     = {102189},
+  year      = {2024},
+  doi       = {10.1016/j.tele.2024.102189}
 }

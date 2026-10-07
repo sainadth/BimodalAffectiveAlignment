@@ -39,3 +39,26 @@ def test_collapse_sums_to_one():
 
 def test_fer7_index():
     assert _fer7_index("Neutral") == 6
+
+
+def test_collapse_methods_differ_and_normalise():
+    import numpy as np
+    from bimodal_empathy.emotion_mapping import GOEMOTION_TO_FER7, collapse_goemotions_to_fer7
+    from bimodal_empathy.config import FER7_LABELS
+
+    names = sorted(GOEMOTION_TO_FER7)
+    id2label = dict(enumerate(names))
+    # every Happy-mapped label at 0.3, neutral at 0.6
+    scores = np.array([0.3 if GOEMOTION_TO_FER7[n] == "Happy" else (0.6 if n == "neutral" else 0.0) for n in names])
+    p_sum = collapse_goemotions_to_fer7(scores, id2label, "sum")
+    p_max = collapse_goemotions_to_fer7(scores, id2label, "max")
+    p_mean = collapse_goemotions_to_fer7(scores, id2label, "mean")
+    for p in (p_sum, p_max, p_mean):
+        assert abs(p.sum() - 1) < 1e-9
+    h, n = FER7_LABELS.index("Happy"), FER7_LABELS.index("Neutral")
+    assert p_sum[h] > p_sum[n]  # 13 x 0.3 beats 0.6 under sum
+    assert p_max[n] > p_max[h] and p_mean[n] > p_mean[h]  # a single strong neutral wins otherwise
+    import pytest
+
+    with pytest.raises(ValueError):
+        collapse_goemotions_to_fer7(scores, id2label, "median")
